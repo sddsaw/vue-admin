@@ -1,7 +1,10 @@
 <script setup lang="ts">
 </script>
+
 <template>
-  <router-view />
+  <el-config-provider size="small">
+    <router-view />
+  </el-config-provider>
 </template>
 
 <style scoped>

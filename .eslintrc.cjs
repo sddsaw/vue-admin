@@ -28,7 +28,13 @@ module.exports = {
     /*
      eslint-plugin-vue 版本更新了，相较之前版本，@8 版本中新增了不少规则，第一条就是 'vue/multi-word-component-names': 'error', 要求组件名称以驼峰格式命名，所以 index.vue 会报错。
     */
-    'vue/multi-word-component-names': 'off'
+    'vue/multi-word-component-names': 'off',
+    'vue/max-attributes-per-line': [2,
+      {
+        singleline: 6, // 当开始标签位于单行时，每行的最大属性数
+        multiline: { max: 1 } // 当开始标签位于多行时，每行的最大属性数
+      }
+    ] // 强制每行的最大属性数
   }
   // TODO 单独设置api规则
   // overrides: [
