@@ -38,3 +38,48 @@ https://www.npmjs.com/package/unplugin-vue-define-options vue3添加组件name�
             -eslint：Run 选择 onType 实时更新
             -如果工作区有多个格式化工具，设置eslint为.js，.ts，.vue文件为默认格式化工具
     （3）安装volar插件 支持vue3
+
+
+
+
+module.exports = {
+  // TODO 这些都可以不引用就可以使用的，但是eslint规则校验不过，so 自定义
+  // globals: {
+  //   defineEmits: 'readonly',
+  //   defineExpose: 'readonly',
+  //   defineProps: 'readonly',
+  //   withDefaults: 'readonly'
+  // },
+  env: {
+    browser: true,
+    es2021: true
+  },
+  extends: [
+    'plugin:vue/vue3-strongly-recommended',
+    'standard'
+  ],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    parser: '@typescript-eslint/parser',
+    sourceType: 'module'
+  },
+  plugins: [
+    'vue',
+    '@typescript-eslint'
+  ],
+  rules: {
+    /*
+     eslint-plugin-vue 版本更新了，相较之前版本，@8 版本中新增了不少规则，第一条就是 'vue/multi-word-component-names': 'error', 要求组件名称以驼峰格式命名，所以 index.vue 会报错。
+    */
+    // 'vue/multi-word-component-names': 'off'
+  },
+  //TODO 单独设置api规则
+  // overrides: [
+  //   {
+  //     files: ['src/api/**/*.ts'],
+  //     rules: {
+  //       camelcase:'off'
+  //     }
+  //   }
+  // ]
+}

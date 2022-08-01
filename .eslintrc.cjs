@@ -11,6 +11,7 @@ module.exports = {
     es2021: true
   },
   extends: [
+    // './.eslintrc-auto-import.json', // TODO 如果全局API报错就开启这个
     'plugin:vue/vue3-strongly-recommended',
     'standard'
   ],
@@ -28,8 +29,8 @@ module.exports = {
      eslint-plugin-vue 版本更新了，相较之前版本，@8 版本中新增了不少规则，第一条就是 'vue/multi-word-component-names': 'error', 要求组件名称以驼峰格式命名，所以 index.vue 会报错。
     */
     'vue/multi-word-component-names': 'off'
-  },
-  //TODO 单独设置api规则
+  }
+  // TODO 单独设置api规则
   // overrides: [
   //   {
   //     files: ['src/api/**/*.ts'],
