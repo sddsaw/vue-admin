@@ -4,3 +4,8 @@
 <template>
   home
 </template>
+<style lang="scss">
+body {
+  color: $color;
+}
+</style>

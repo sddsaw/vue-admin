@@ -1,5 +1,5 @@
 <script lang='ts' setup>
-import apis from '@/apis/user'
+import apis from '@/api/user'
 console.log(apis)
 </script>
 <template>
