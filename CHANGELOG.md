@@ -1,10 +1,5 @@
 # Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
 ## 0.0.0 (2022-08-02)
-
-
 ### Features
 
 * 按需安装element-plus ([de8716c](https://github.com/sddsaw/vue-admin/commit/de8716c8a3f7e8d7149ddea3cb65594304120ca9))

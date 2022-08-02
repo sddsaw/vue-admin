@@ -39,4 +39,18 @@ https://www.npmjs.com/package/unplugin-vue-define-options vue3添加组件name�
             -如果工作区有多个格式化工具，设置eslint为.js，.ts，.vue文件为默认格式化工具
     （3）安装volar插件 支持vue3
 
+feat: 新特性
+fix: 修改问题
+refactor: 代码重构
+docs: 文档修改
+style: 代码格式修改, 注意不是 css 修改
+test: 测试用例修改
+chore: 其他修改, 比如构建流程, 依赖管理.
+pref: 性能提升的修改
+build: 对项目构建或者依赖的改动
+ci: CI 的修改
+revert: revert 前一个 commit
+
+changelog 需要在master分支上面进行初始化  npx standard-version --first-release
+
 
