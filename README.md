@@ -54,3 +54,5 @@ revert: revert 前一个 commit
 changelog 需要在master分支上面进行初始化  npx standard-version --first-release
 
 
+npm i vite-plugin-vue-setup-extend -D
+https://segmentfault.com/a/1190000041884869/

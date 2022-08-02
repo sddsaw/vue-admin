@@ -11,7 +11,7 @@ module.exports = {
     es2021: true
   },
   extends: [
-    // './.eslintrc-auto-import.json', // TODO 如果全局API报错就开启这个
+    './.eslintrc-auto-import.json', // TODO 如果全局API报错就开启这个
     'plugin:vue/vue3-strongly-recommended',
     'standard'
   ],
