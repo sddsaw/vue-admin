@@ -2,11 +2,11 @@
  * @description: 系统设置模块
  * @return {*}
  */
-const layout = () => import('@/layout/index.vue')
-const systemRouter = {
-  path: '/system',
+import { RouteRecordRaw, RouterView } from 'vue-router'
+const systemRouter: RouteRecordRaw = {
+  path: 'system', // TODO 此处也不建议使用/ 如果没有/也是跟着父级的路由，因为父级是/所以是正常的
   name: 'system',
-  component: layout,
+  component: RouterView,
   redirect: '/system/menu',
   meta: {
     title: 'message.router.system',
@@ -20,79 +20,29 @@ const systemRouter = {
   },
   children: [
     {
-      path: '/system/menu',
-      name: 'systemMenu',
-      component: () => import('@/views/system/menu/index.vue'),
-      meta: {
-        title: 'message.router.systemMenu',
-        isLink: '',
-        isHide: false,
-        isKeepAlive: true,
-        isAffix: false,
-        isIframe: false,
-        roles: ['admin'],
-        icon: 'iconfont icon-caidan'
-      }
+      path: '/system/menu', // TODO带斜杠是不关联父级路由，不带是关联
+      name: '/system/menu',
+      component: () => import('@/views/system/menu/index.vue')
     },
     {
-      path: '/system/role',
-      name: 'systemRole',
-      component: () => import('@/views/system/role/index.vue'),
-      meta: {
-        title: 'message.router.systemRole',
-        isLink: '',
-        isHide: false,
-        isKeepAlive: true,
-        isAffix: false,
-        isIframe: false,
-        roles: ['admin'],
-        icon: 'ele-ColdDrink'
-      }
+      path: 'role',
+      name: 'role',
+      component: () => import('@/views/system/role/index.vue')
     },
     {
-      path: '/system/user',
-      name: 'systemUser',
-      component: () => import('@/views/system/user/index.vue'),
-      meta: {
-        title: 'message.router.systemUser',
-        isLink: '',
-        isHide: false,
-        isKeepAlive: true,
-        isAffix: false,
-        isIframe: false,
-        roles: ['admin'],
-        icon: 'iconfont icon-icon-'
-      }
+      path: 'user',
+      name: 'user',
+      component: () => import('@/views/system/user/index.vue')
     },
     {
-      path: '/system/dept',
-      name: 'systemDept',
-      component: () => import('@/views/system/dept/index.vue'),
-      meta: {
-        title: 'message.router.systemDept',
-        isLink: '',
-        isHide: false,
-        isKeepAlive: true,
-        isAffix: false,
-        isIframe: false,
-        roles: ['admin'],
-        icon: 'ele-OfficeBuilding'
-      }
+      path: 'dept',
+      name: 'dept',
+      component: () => import('@/views/system/dept/index.vue')
     },
     {
-      path: '/system/dic',
-      name: 'systemDic',
-      component: () => import('@/views/system/dic/index.vue'),
-      meta: {
-        title: 'message.router.systemDic',
-        isLink: '',
-        isHide: false,
-        isKeepAlive: true,
-        isAffix: false,
-        isIframe: false,
-        roles: ['admin'],
-        icon: 'ele-SetUp'
-      }
+      path: 'dic',
+      name: 'dic',
+      component: () => import('@/views/system/dic/index.vue')
     }
   ]
 }

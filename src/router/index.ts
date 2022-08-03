@@ -6,6 +6,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 //     modulesFile.push(res.default)
 //   })
 // }
+import systemRouter from './modules/system'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -21,7 +22,8 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '首页'
         }
-      }
+      },
+      systemRouter
     ]
   }
   // ...modulesFile

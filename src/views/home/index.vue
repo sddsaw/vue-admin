@@ -2,7 +2,7 @@
 
 </script>
 <template>
-  home
+  首页
 </template>
 <style lang="scss">
 

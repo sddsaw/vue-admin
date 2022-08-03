@@ -2,12 +2,13 @@
  * @description: 菜单嵌套模块
  * @return {*}
  */
-const layout = () => import('@/layout/index.vue')
 
-const menuRouter = {
+import { RouterView, RouteRecordRaw } from 'vue-router'
+
+export default {
   path: '/menu',
   name: 'menu',
-  component: layout,
+  component: RouterView,
   redirect: '/menu/menu1',
   meta: {
     title: 'message.router.menu',
@@ -23,7 +24,7 @@ const menuRouter = {
     {
       path: '/menu/menu1',
       name: 'menu1',
-      component: layout,
+      component: RouterView,
       redirect: '/menu/menu1/menu11',
       meta: {
         title: 'message.router.menu1',
@@ -132,5 +133,5 @@ const menuRouter = {
       }
     }
   ]
-}
-export default menuRouter
+} as RouteRecordRaw
+// TODO 这种是掩耳盗铃，是把该对象转换成RouteRecordRaw，是没有类型校验的
