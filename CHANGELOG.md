@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2](https://github.com/sddsaw/vue-admin/compare/v0.0.1...v0.0.2) (2022-08-03)
+
+
+### Features
+
+* 添加mock，header模块和菜单栏 ([a77f2af](https://github.com/sddsaw/vue-admin/commit/a77f2af3799cea96c52f86e971b9e4f4005bd73f))
+* 增加router模块分割 ([c08dd14](https://github.com/sddsaw/vue-admin/commit/c08dd14af6e286363327ab7d65428a3468832beb))
+
 ### [0.0.1](https://github.com/sddsaw/vue-admin/compare/v0.0.0...v0.0.1) (2022-08-02)
 
 
