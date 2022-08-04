@@ -3,5 +3,7 @@ import apis from '@/api/user'
 console.log(apis)
 </script>
 <template>
-  login
+  <div class="login-container">
+    1
+  </div>
 </template>

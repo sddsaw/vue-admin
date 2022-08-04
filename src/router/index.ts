@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
 // const files = import.meta.glob('./modules/*.ts')
 // const modulesFile = []
 // for (const dire in files) {
@@ -8,15 +10,14 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 // }
 import systemRouter from './modules/system'
 
-const routes: Array<RouteRecordRaw> = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: '/',
-    redirect: '/home',
     component: () => import('@/layout/index.vue'),
     children: [
       {
-        path: '/home',
+        path: '',
         name: 'home',
         component: () => import('@/views/home/index.vue'),
         meta: {
@@ -25,11 +26,25 @@ const routes: Array<RouteRecordRaw> = [
       },
       systemRouter
     ]
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login/index.vue'),
+    meta: {
+      title: '登录'
+    }
   }
   // ...modulesFile
 ]
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+router.beforeEach(() => {
+  nprogress.start()
+})
+router.afterEach(() => {
+  nprogress.done()
 })
 export default router
