@@ -4,6 +4,7 @@ import '@/styles/app.scss'
 import '@/styles/_global.scss'
 import router from './router'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import '@purge-icons/generated'
 import { createPinia } from 'pinia'
 const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {

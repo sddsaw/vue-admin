@@ -6,6 +6,7 @@ import { viteMockServe } from 'vite-plugin-mock'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import PurgeIcons from 'vite-plugin-purge-icons'
 // TODO 需要安装@type/node
 import path from 'path'
 export default ({ command }: ConfigEnv): UserConfigExport => {
@@ -14,6 +15,14 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       vue(),
       vueJsx({}),
       eslintPlugin(),
+      PurgeIcons({ // 按需加载
+        content: [
+          '**/*.html',
+          '**/*.js',
+          '**/*.ts',
+          '**/*.vue'
+        ]
+      }),
       viteMockServe({
         mockPath: 'mock',
         localEnabled: command === 'serve'

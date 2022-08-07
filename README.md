@@ -52,7 +52,7 @@ ci: CI 的修改
 revert: revert 前一个 commit
 
 changelog 需要在master分支上面进行初始化  npx standard-version --first-release
-
+可以使用 rollup-plugin-visualizer 插件查看当前项目打包结构来针对性优化
 
 npm i vite-plugin-vue-setup-extend -D
 https://segmentfault.com/a/1190000041884869/

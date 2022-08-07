@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.6",
+    "@iconify/iconify": "^2.2.1",
+    "animate.css": "^4.1.1",
     "axios": "^0.27.2",
     "element-plus": "^2.2.12",
     "nprogress": "^0.2.0",
@@ -22,7 +24,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
-    "@iconify/iconify": "^2.2.1",
+    "@iconify/json": "^2.1.87",
     "@types/node": "^18.6.3",
     "@types/nprogress": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
@@ -49,6 +51,7 @@
     "vite": "^3.0.0",
     "vite-plugin-eslint": "^1.7.0",
     "vite-plugin-mock": "^2.9.6",
+    "vite-plugin-purge-icons": "^0.8.2",
     "vue-tsc": "^0.38.4"
   },
   "lint-staged": {
