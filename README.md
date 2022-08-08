@@ -14,6 +14,7 @@ This template should help get you started developing with Vue 3 and TypeScript i
 * commitlint https://github.com/conventional-changelog/commitlint; 对commit message进行规范约束,不按照规范提交不到个人仓库
 * lint-staged https://github.com/okonet/lint-staged#readme 在提交代码时进行eslint校验,校验不过不可提交到远端仓库
 * vite-plugin-eslint https://github.com/gxmari007/vite-plugin-eslint 在开发,打包时进行eslint校验,终端和浏览器都会提示相应的错误信息。
+https://github.com/vbenjs/vite-plugin-mock/blob/main/README.zh_CN.md mock文档
 
 https://github.com/element-plus/element-plus/issues/5693
 https://www.npmjs.com/package/unplugin-vue-define-options vue3添加组件name名插件

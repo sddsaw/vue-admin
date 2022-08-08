@@ -6,7 +6,7 @@ import { viteMockServe } from 'vite-plugin-mock'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import PurgeIcons from 'vite-plugin-purge-icons'
+// import PurgeIcons from 'vite-plugin-purge-icons'
 // TODO 需要安装@type/node
 import path from 'path'
 export default ({ command }: ConfigEnv): UserConfigExport => {
@@ -15,14 +15,14 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       vue(),
       vueJsx({}),
       eslintPlugin(),
-      PurgeIcons({ // 按需加载
-        content: [
-          '**/*.html',
-          '**/*.js',
-          '**/*.ts',
-          '**/*.vue'
-        ]
-      }),
+      // PurgeIcons({ // 按需加载
+      //   content: [
+      //     '**/*.html',
+      //     '**/*.js',
+      //     '**/*.ts',
+      //     '**/*.vue'
+      //   ]
+      // }),
       viteMockServe({
         mockPath: 'mock',
         localEnabled: command === 'serve'
@@ -51,18 +51,18 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
           additionalData: '@import "@/styles/variables.scss";'
         }
       }
-    },
-    // TODO 代理
-    server: {
-      proxy: {
-        // TODO 如果使用代理 baseUrl不需要设置
-        '/api': {
-          target: 'http://jsonplaceholder.typicode.com', // 代理的目标地址
-          changeOrigin: true, // 兼用虚拟主机
-          rewrite: (path) => path.replace(/^\/api/, '')// 路径重写
-        }
-      }
     }
+    // TODO 代理
+    // server: {
+    //   proxy: {
+    //     // TODO 如果使用代理 baseUrl不需要设置
+    //     '/api': {
+    //       target: 'http://jsonplaceholder.typicode.com', // 代理的目标地址
+    //       changeOrigin: true, // 兼用虚拟主机
+    //       rewrite: (path) => path.replace(/^\/api/, '')// 路径重写
+    //     }
+    //   }
+    // }
   }
 }
 // export default defineConfig({
