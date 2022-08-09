@@ -18,7 +18,7 @@
 <script lang='ts' setup>
 import { storeToRefs } from 'pinia'
 import { useCounterStore } from '@/store/index'
-import { ArrowRight } from '@element-plus/icons-vue'
+import { ArrowRight, Expand, Fold } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 import { computed } from 'vue'
 const countStore = useCounterStore()

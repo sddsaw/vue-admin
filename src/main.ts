@@ -5,4 +5,8 @@ import '@/styles/_global.scss'
 import router from './router'
 // import '@purge-icons/generated'
 import { createPinia } from 'pinia'
-createApp(App).use(router).use(createPinia()).mount('#app')
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
+createApp(App).use(router).use(pinia).mount('#app')

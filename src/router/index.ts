@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
+import userStore from '@/store/modules/user'
 // const files = import.meta.glob('./modules/*.ts')
 // const modulesFile = []
 // for (const dire in files) {
@@ -15,6 +16,9 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     name: '/',
     component: () => import('@/layout/index.vue'),
+    meta: {
+      requiresAuth: true
+    },
     children: [
       {
         path: '',
@@ -41,7 +45,14 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 })
-router.beforeEach(() => {
+router.beforeEach((to, from) => {
+  const createUserStore = userStore()
+  if (to.meta.requiresAuth && !createUserStore.userInfo?.accessToken) {
+    return {
+      path: '/login',
+      query: { redirect: to.fullPath }
+    }
+  }
   nprogress.start()
 })
 router.afterEach(() => {

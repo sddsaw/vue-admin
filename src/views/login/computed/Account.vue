@@ -22,8 +22,8 @@
       </el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" native-type="submit" class="w-full">
-        登录
+      <el-button type="primary" native-type="submit" class="w-full" :loading="loading">
+        {{ loading ? '登录中' :'登录' }}
       </el-button>
     </el-form-item>
   </el-form>
@@ -33,19 +33,22 @@
 <script lang='ts' setup>
 import { reactive, ref } from 'vue'
 import { getLogin } from '@/api/user'
+import userStore from '@/store/modules/user'
 import { LoginParams } from '@/api/types/user'
+import { useRouter, useRoute } from 'vue-router'
 import { Lock, User } from '@element-plus/icons-vue'
 import AppIcon from '@/components/AppIcon/index.vue'
-import type { FormRules, FormInstance } from 'element-plus'
+import { FormRules, FormInstance, ElMessage } from 'element-plus'
 
+const router = useRouter()
+const route = useRoute()
+const createUserStore = userStore()
 const parmas:LoginParams = reactive({
   userName: '',
   passWord: ''
 })
-const isShowPassword = ref(true)
 const loading = ref(false)
-
-// const formRef = ref< InstanceType < typeof ElForm > | null >(null)
+const isShowPassword = ref(true)
 const ruleFormRef = ref<FormInstance>()
 const rules = reactive<FormRules>({
   userName: [
@@ -64,14 +67,25 @@ const rules = reactive<FormRules>({
   ]
 })
 
+/**
+ * @description: 登录
+ * @param {*} formEl
+ * @return {*}
+ */
 const handelSubmit = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   const validData = await formEl.validate()
   if (!validData) return false
   loading.value = true
-  getLogin(parmas).then(res => {
-    console.log(res)
-  })
+  const res = await getLogin(parmas)
+  ElMessage.success('登录成功')
+  createUserStore.userInfo = res
+  let redirect = route.query.redirect || '/'
+  if (typeof redirect !== 'string') {
+    redirect = '/'
+  }
+  // FIXME 格式校验不过 待修改
+  setTimeout(() => router.replace(redirect), 800)
 }
 </script>
 

@@ -19,12 +19,21 @@ export default [
     url: '/mock/api/login',
     method: 'post',
     statusCode: 200,
-    response: ({ query }) => {
-      const { userName, passWord } = query
-      console.log(userName)
-      console.log(passWord)
-
+    response: () => {
       return userInfo
+    }
+  },
+  {
+    url: '/mock/api/logout',
+    method: 'get',
+    statusCode: 200,
+    response: () => {
+      return {
+        code: 200,
+        success: true,
+        msg: '操作成功',
+        traceId: '265d2a1722124a9e'
+      }
     }
   }
 
