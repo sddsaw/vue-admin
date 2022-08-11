@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ILoginInfo } from '@/api/types/user'
+
 const userStore = defineStore('userStore', {
   state: () => ({
     userInfo: null as ILoginInfo | null
@@ -15,6 +16,7 @@ const userStore = defineStore('userStore', {
     resetState () {
       this.$reset()
     }
+
   },
   persist: {
     storage: sessionStorage,

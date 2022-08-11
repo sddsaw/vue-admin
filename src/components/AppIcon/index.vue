@@ -1,6 +1,6 @@
 <template>
   <!-- <span class="iconify" :data-icon="props.icon" /> -->
-  <Icon :icon="props.icon" />
+  <Icon :icon="props.icon" class="app-icon" />
 </template>
 
 <script lang='ts' setup>
@@ -10,3 +10,11 @@ const props = defineProps<{
   size?:string
 }>()
 </script>
+<style lang="scss" scoped>
+.app-icon{
+  width: 24px;
+  font-size: 14px;
+  margin-right: 5px;
+  display: block;
+}
+</style>

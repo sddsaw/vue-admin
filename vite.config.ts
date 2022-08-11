@@ -6,6 +6,7 @@ import { viteMockServe } from 'vite-plugin-mock'
 import AutoImport from 'unplugin-auto-import/vite'
 import ElementPlus from 'unplugin-element-plus/vite'
 import Components from 'unplugin-vue-components/vite'
+import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // import PurgeIcons from 'vite-plugin-purge-icons'
 // TODO 需要安装@type/node
@@ -16,6 +17,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       vue(),
       vueJsx({}),
       eslintPlugin(),
+      vueSetupExtend(),
       ElementPlus({
         // options
       }),

@@ -7,20 +7,22 @@ const systemRouter: RouteRecordRaw = {
   path: '/system', // TODO 此处也不建议使用/ 如果没有/也是跟着父级的路由，因为父级是/所以是正常的
   name: 'system',
   component: RouterView,
+  redirect: '/system/menu',
   meta: {
-    title: '设置'
+    icon: 'material-symbols:settings-outline-rounded',
+    title: '系统设置'
   },
   children: [
     {
-      path: 'menu', // TODO带斜杠是不关联父级路由，不带是关联
-      name: 'menu',
+      path: '/system/menu', // TODO带斜杠是不关联父级路由，不带是关联
+      name: 'systemMenu',
       component: () => import('@/views/system/menu/index.vue'),
       meta: {
         title: '菜单管理'
       }
     },
     {
-      path: 'role',
+      path: '/system/role',
       name: 'role',
       component: () => import('@/views/system/role/index.vue'),
       meta: {
@@ -28,7 +30,7 @@ const systemRouter: RouteRecordRaw = {
       }
     },
     {
-      path: 'user',
+      path: '/system/user',
       name: 'user',
       component: () => import('@/views/system/user/index.vue'),
       meta: {
@@ -36,7 +38,7 @@ const systemRouter: RouteRecordRaw = {
       }
     },
     {
-      path: 'dept',
+      path: '/system/dept',
       name: 'dept',
       component: () => import('@/views/system/dept/index.vue'),
       meta: {
@@ -44,7 +46,7 @@ const systemRouter: RouteRecordRaw = {
       }
     },
     {
-      path: 'dic',
+      path: '/system/dic',
       name: 'dic',
       component: () => import('@/views/system/dic/index.vue'),
       meta: {

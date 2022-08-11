@@ -54,6 +54,7 @@
     "vite-plugin-eslint": "^1.7.0",
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-purge-icons": "^0.8.2",
+    "vite-plugin-vue-setup-extend": "^0.4.0",
     "vue-tsc": "^0.38.4"
   },
   "lint-staged": {

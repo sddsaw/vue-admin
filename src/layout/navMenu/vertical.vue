@@ -1,53 +1,58 @@
 <template>
   <el-menu
     router
-    :unique-opened="true"
-    :collapse-transition="false"
-    background-color="#304156"
     text-color="#fff"
-    default-active="2"
+    :unique-opened="true"
     :collapse="isCollapse"
+    background-color="#304156"
+    :collapse-transition="false"
+    :default-active="route.path"
   >
-    <el-menu-item index="/">
-      <el-icon><HomeFilled /></el-icon>
-      <span>首页</span>
-    </el-menu-item>
-    <el-sub-menu index="1">
-      <template #title>
-        <el-icon><setting /></el-icon>
-        <span>设置</span>
+    <template v-for="val in menuLists">
+      <el-sub-menu :index="val.path" v-if="val.children && val.children.length > 0" :key="val.path">
+        <template #title>
+          <app-icon :icon="val.meta.icon" />
+          <span>{{ val.meta.title }}</span>
+        </template>
+        <sub-item :children-list="val.children" />
+      </el-sub-menu>
+      <template v-else>
+        <el-menu-item :index="val.path" :key="val.path">
+          <app-icon :icon="val.meta.icon" />
+          <template #title v-if="!val.meta.isLink || (val.meta.isLink && val.meta.isIframe)">
+            <span>{{ val.meta.title }}</span>
+          </template>
+          <template #title v-else>
+            <a :href="val.meta.isLink" target="_blank" rel="opener" class="w100">{{ val.meta.title }}</a>
+          </template>
+        </el-menu-item>
       </template>
-      <el-menu-item index="system/menu">
-        菜单管理
-      </el-menu-item>
-      <el-menu-item index="system/role">
-        角色管理
-      </el-menu-item>
-      <el-menu-item index="system/user">
-        用户管理
-      </el-menu-item>
-      <el-menu-item index="system/dept">
-        部门管理
-      </el-menu-item>
-      <el-menu-item index="system/dic">
-        字典管理
-      </el-menu-item>
-    </el-sub-menu>
+    </template>
   </el-menu>
 </template>
 <script lang="ts" setup>
 import { useCounterStore } from '@/store/index'
 import { storeToRefs } from 'pinia'
+import { RouteRecordRaw, useRoute } from 'vue-router'
+import { computed } from 'vue'
+import AppIcon from '@/components/AppIcon/index.vue'
+import SubItem from '@/layout/navMenu/subItem.vue'
+const route = useRoute()
 const countStore = useCounterStore()
 const { isCollapse } = storeToRefs(countStore)
-// import SubItem from '@/layout/navMenu/subItem.vue'
+interface Props {
+  menuList:RouteRecordRaw[]
+}
+const props = defineProps<Props>()
+
+const menuLists = computed(() => { return props.menuList })
 </script>
 <style>
 .el-menu{
   border-right: none;
+  user-select:none;
 }
 .el-menu:not(.el-menu--collapse) {
   width: 200px;
-  min-height: 400px;
 }
 </style>

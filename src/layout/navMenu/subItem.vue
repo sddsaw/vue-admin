@@ -1,21 +1,21 @@
 <template>
-  <template v-for="val in chils">
+  <template v-for="val in childrenLists">
     <el-sub-menu :index="val.path" :key="val.path" v-if="val.children && val.children.length > 0">
       <template #title>
-        <SvgIcon :name="val.meta.icon" />
+        <AppIcon :icon="val.meta.icon" />
         <span>{{ val.meta.title }}</span>
       </template>
-      <sub-item :chil="val.children" />
+      <sub-item :children-list="val.children" />
     </el-sub-menu>
     <template v-else>
       <el-menu-item :index="val.path" :key="val.path">
         <template v-if="!val.meta.isLink || (val.meta.isLink && val.meta.isIframe)">
-          <SvgIcon :name="val.meta.icon" />
+          <AppIcon :icon="val.meta.icon" />
           <span>{{ val.meta.title }}</span>
         </template>
         <template v-else>
           <a :href="val.meta.isLink" target="_blank" rel="opener" class="w100">
-            <SvgIcon :name="val.meta.icon" />
+            <AppIcon :icon="val.meta.icon" />
             {{ val.meta.title }}
           </a>
         </template>
@@ -24,8 +24,13 @@
   </template>
 </template>
 
-<script lang='ts' setup>
-// const props = defineProps<{
-//   chils:any
-// }>()
+<script lang='ts' setup name="subItem">
+import { computed } from 'vue'
+import { RouteRecordRaw } from 'vue-router'
+import AppIcon from '@/components/AppIcon/index.vue'
+interface Props {
+  childrenList:RouteRecordRaw
+}
+const props = defineProps<Props>()
+const childrenLists = computed(() => { return props.childrenList })
 </script>

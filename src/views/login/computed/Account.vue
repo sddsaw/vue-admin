@@ -38,7 +38,8 @@ import { LoginParams } from '@/api/types/user'
 import { useRouter, useRoute } from 'vue-router'
 import { Lock, User } from '@element-plus/icons-vue'
 import AppIcon from '@/components/AppIcon/index.vue'
-import { FormRules, FormInstance, ElMessage } from 'element-plus'
+import type { FormInstance, FormRules } from 'element-plus'
+import { ElMessage } from 'element-plus'
 
 const router = useRouter()
 const route = useRoute()

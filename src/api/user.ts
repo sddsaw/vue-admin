@@ -28,3 +28,14 @@ export const logOut = () => {
     url: '/mock/api/logout'
   })
 }
+/**
+ * @description: 获取菜单
+ * @return {*}
+ */
+export const menu = () => {
+  return request({
+    method: 'GET',
+    loading: true,
+    url: '/mock/api/menu'
+  })
+}

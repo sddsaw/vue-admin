@@ -10,14 +10,16 @@ import userStore from '@/store/modules/user'
 //   })
 // }
 import systemRouter from './modules/system'
-
+import menu from './modules/menu'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: '/',
     component: () => import('@/layout/index.vue'),
+    redirect: '/',
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      title: '首页'
     },
     children: [
       {
@@ -28,7 +30,8 @@ const routes: RouteRecordRaw[] = [
           title: '首页'
         }
       },
-      systemRouter
+      systemRouter,
+      menu
     ]
   },
   {
