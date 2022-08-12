@@ -2,8 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "@/styles/common/dots.scss";
 @import "animate.css";
-@import "./common/dots.scss";
+
 @import 'common/transition.scss';
 
 // @import "tailwindcss/base";

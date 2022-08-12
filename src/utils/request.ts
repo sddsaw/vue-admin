@@ -1,9 +1,10 @@
-import { getCurrentInstance } from 'vue'
+// import { getCurrentInstance } from 'vue'
+import { baseColorfullLoading } from '@/utils/common'
+
 import axios, { AxiosRequestConfig } from 'axios'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import userStore from '@/store/modules/user'
 import router from '@/router/'
-// let loadingInstance
 const createUserStroe = userStore()
 const request = axios.create({
   // baseURL: import.meta.env.VITE_APP_BASE_URL,
@@ -11,14 +12,16 @@ const request = axios.create({
   headers: { 'Content-Type': 'application/json' }
 })
 // const { ctx } = getCurrentInstance()
-console.log(getCurrentInstance(), '----')
+// console.log(getCurrentInstance(), '----')
 // TOTO 请求拦截
+// eslint-disable-next-line no-unused-vars
+let loadingInstance :any
 request.interceptors.request.use(config => {
   if (createUserStroe.userInfo && createUserStroe.userInfo.accessToken) {
     // TODO 加此判断是因为headers里面是有可能为null，校验不过
     if (config && config?.headers) config.headers.Authorization = `Basic ${createUserStroe.userInfo.accessToken}`
   }
-  // if (config.loading) loadingInstance = proxy?.proxy.$baseColorfullLoading()
+  if (config.loading) loadingInstance = baseColorfullLoading()
   return config
 }, error => {
   console.log(error)
@@ -33,6 +36,7 @@ request.interceptors.request.use(config => {
 // TODO控制登录过期的锁
 let isRefreshing = false
 request.interceptors.response.use(response => { // http状态码为200，但是code不为200在这里处理
+  if (loadingInstance) loadingInstance.close()
   const code:number = response.data.code
   // 容错率 正常情况下 和非json类型
   if (!code || code === 200) {
@@ -63,9 +67,15 @@ request.interceptors.response.use(response => { // http状态码为200，但是c
   ElMessage.error(response.data.msg || '请求失败，请稍后重试')
   return Promise.reject(response)
 }, error => { // http状态码不为200 在这里处理
+  if (loadingInstance) loadingInstance.close()
   return Promise.reject(error)
 })
-// TODO 自定义添加AxiosRequestConfig属性  {loading?:boolean} &
+
+/**
+ * @description: 自定义添加AxiosRequestConfig属性  {loading?:boolean} &
+ * @param {*} any
+ * @return {*}
+ */
 export default <T = any>(config:AxiosRequestConfig) => {
   return request(config).then(res => {
     return (res.data.data || res.data) as T

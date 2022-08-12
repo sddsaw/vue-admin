@@ -8,8 +8,9 @@ export const baseColorfullLoading = (text = '正在加载中...') => {
   const loading = ElLoading.service({
     lock: true,
     text,
-    spinner: 'dots-loader',
-    background: 'rgba(0, 0, 0, 0.8)'
+    // customClass: 'dots-loader',
+    // spinner: 'dots-loader',
+    background: 'rgba(0, 0, 0, 0.4)'
   })
   return loading
 }
