@@ -3,12 +3,13 @@
  * @return {*}
  */
 
-import { RouterView, RouteRecordRaw } from 'vue-router'
+import { RouteRecordRaw } from 'vue-router'
 
 export default {
   path: '/menu',
   name: 'menu',
-  component: RouterView,
+  // component: RouterView,
+  component: () => import('@/layout/routerView/parent.vue'),
   redirect: '/menu/menu1/menu11',
   meta: {
     title: '菜单嵌套',
@@ -18,7 +19,8 @@ export default {
     {
       path: '/menu/menu1',
       name: 'menu1',
-      component: RouterView,
+      // component: RouterView,
+      component: () => import('@/layout/routerView/parent.vue'),
       redirect: '/menu/menu1/menu11',
       meta: {
         title: '菜单1',

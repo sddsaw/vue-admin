@@ -1,19 +1,18 @@
 <template>
   <el-container class="h-full w-full">
     <Aside />
-    <el-container class="flex-col flex-center">
-      <!-- <el-header>
-        Header
-      </el-header> -->
+    <el-container class="flex-center">
       <Header />
-      <el-main style="background:green">
-        <RouterView />
-      </el-main>
+      <el-scrollbar ref="layoutDefaultsScrollbarRef">
+        <Main />
+      </el-scrollbar>
     </el-container>
+    <!-- <el-backtop target=".layout-backtop .el-scrollbar__wrap" /> -->
   </el-container>
 </template>
 
 <script lang='ts' setup>
+import Main from '@/layout/component/main.vue'
 import Aside from '@/layout/component/aside.vue'
 import Header from '@/layout/component/header.vue'
 </script>

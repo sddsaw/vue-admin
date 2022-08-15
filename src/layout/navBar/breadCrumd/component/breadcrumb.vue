@@ -8,7 +8,7 @@
     </el-icon>
     <el-breadcrumb :separator-icon="ArrowRight">
       <div>
-        <TransitionGroup tag="ul" name="fade" class="container">
+        <TransitionGroup tag="ul" name="fade">
           <el-breadcrumb-item
             v-for="(item,index) in routes"
             :key="item.path"
@@ -24,21 +24,18 @@
 </template>
 
 <script lang='ts' setup>
+import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
 import { useCounterStore } from '@/store/index'
 import { ArrowRight, Expand, Fold } from '@element-plus/icons-vue'
-import { useRouter } from 'vue-router'
-import { computed } from 'vue'
+const router = useRouter()
 const countStore = useCounterStore()
 const { isCollapse } = storeToRefs(countStore)
-const setIconHadnel = () => {
-  countStore.setIncrement()
-}
-const router = useRouter()
-const routes = computed(() => {
-  return router.currentRoute.value.matched.filter(item => item.meta.title)
-})
 const fullPath = router.currentRoute.value.fullPath
+const setIconHadnel = () => { countStore.setIncrement() }
+const routes = computed(() => { return router.currentRoute.value.matched.filter(item => item.meta.title) })
+
 /**
  * @description: 此处路由不可重定向
  * @return {* RouteLocationMatched}

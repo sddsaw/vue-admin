@@ -144,6 +144,62 @@ const menuRouter = {
     }
   ]
 }
+const limitsRouter = {
+  path: '/limits',
+  name: 'limits',
+  redirect: '/limits/frontEnd',
+  meta: {
+    title: '权限管理',
+    icon: 'ri:shield-keyhole-line'
+  },
+  children: [
+    {
+      path: '/limits/frontEnd',
+      name: 'limitsFrontEnd',
+      redirect: '/limits/frontEnd/page',
+      meta: {
+        title: '前端控制',
+        icon: 'ri:shield-keyhole-line'
+      },
+      children: [
+        {
+          path: '/limits/frontEnd/page',
+          name: 'limitsFrontEndPage',
+          meta: {
+            title: '页面权限',
+            icon: 'iconoir:multiple-pages-empty'
+          }
+        },
+        {
+          path: '/limits/frontEnd/btn',
+          name: 'limitsFrontEndBtn',
+          meta: {
+            title: '按钮权限',
+            icon: 'mdi:button-pointer'
+          }
+        }
+      ]
+    },
+    {
+      path: '/limits/backEnd',
+      name: 'limitsBackEnd',
+      meta: {
+        title: '后端控制',
+        icon: 'ri:shield-keyhole-line'
+      },
+      children: [
+        {
+          path: '/limits/backEnd/page',
+          name: 'limitsBackEndEndPage',
+          meta: {
+            title: '页面权限',
+            icon: 'iconoir:multiple-pages-empty'
+          }
+        }
+      ]
+    }
+  ]
+}
 export default [
   {
     url: '/mock/api/login',
@@ -173,6 +229,7 @@ export default [
       return [
         homeRouter,
         systemRouter,
+        limitsRouter,
         menuRouter
       ]
     }

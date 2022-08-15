@@ -1,38 +1,30 @@
+import { RouteRecordRaw } from 'vue-router'
+
 /**
  * @description: 权限管理模块
  * @return {*}
  */
-const layout = () => import('@/layout/index.vue')
-const limitsRouter = {
+const limitsRouter : RouteRecordRaw = {
   path: '/limits',
   name: 'limits',
-  component: () => layout,
+  // component: RouterView,
+  component: () => import('@/layout/routerView/parent.vue'),
+
   redirect: '/limits/frontEnd',
   meta: {
-    title: 'message.router.limits',
-    isLink: '',
-    isHide: false,
-    isKeepAlive: true,
-    isAffix: false,
-    isIframe: false,
-    roles: ['admin', 'common'],
-    icon: 'iconfont icon-quanxian'
+    title: '权限管理',
+    icon: 'ri:shield-keyhole-line'
   },
   children: [
     {
       path: '/limits/frontEnd',
       name: 'limitsFrontEnd',
-      component: layout,
+      // component: RouterView,
+      component: () => import('@/layout/routerView/parent.vue'),
       redirect: '/limits/frontEnd/page',
       meta: {
-        title: 'message.router.limitsFrontEnd',
-        isLink: '',
-        isHide: false,
-        isKeepAlive: true,
-        isAffix: false,
-        isIframe: false,
-        roles: ['admin', 'common'],
-        icon: ''
+        title: '前端控制',
+        icon: 'ri:shield-keyhole-line'
       },
       children: [
         {
@@ -40,14 +32,8 @@ const limitsRouter = {
           name: 'limitsFrontEndPage',
           component: () => import('@/views/limits/frontEnd/page/index.vue'),
           meta: {
-            title: 'message.router.limitsFrontEndPage',
-            isLink: '',
-            isHide: false,
-            isKeepAlive: true,
-            isAffix: false,
-            isIframe: false,
-            roles: ['admin', 'common'],
-            icon: ''
+            title: '页面权限',
+            icon: 'iconoir:multiple-pages-empty'
           }
         },
         {
@@ -55,14 +41,8 @@ const limitsRouter = {
           name: 'limitsFrontEndBtn',
           component: () => import('@/views/limits/frontEnd/btn/index.vue'),
           meta: {
-            title: 'message.router.limitsFrontEndBtn',
-            isLink: '',
-            isHide: false,
-            isKeepAlive: true,
-            isAffix: false,
-            isIframe: false,
-            roles: ['admin', 'common'],
-            icon: ''
+            title: '按钮权限',
+            icon: 'mdi:button-pointer'
           }
         }
       ]
@@ -72,14 +52,8 @@ const limitsRouter = {
       name: 'limitsBackEnd',
       component: () => import('@/layout/routerView/parent.vue'),
       meta: {
-        title: 'message.router.limitsBackEnd',
-        isLink: '',
-        isHide: false,
-        isKeepAlive: true,
-        isAffix: false,
-        isIframe: false,
-        roles: ['admin', 'common'],
-        icon: ''
+        title: '后端控制',
+        icon: 'ri:shield-keyhole-line'
       },
       children: [
         {
@@ -87,14 +61,8 @@ const limitsRouter = {
           name: 'limitsBackEndEndPage',
           component: () => import('@/views/limits/backEnd/page/index.vue'),
           meta: {
-            title: 'message.router.limitsBackEndEndPage',
-            isLink: '',
-            isHide: false,
-            isKeepAlive: true,
-            isAffix: false,
-            isIframe: false,
-            roles: ['admin', 'common'],
-            icon: ''
+            title: '页面权限',
+            icon: 'iconoir:multiple-pages-empty'
           }
         }
       ]

@@ -53,6 +53,6 @@ const menuLists = computed(() => { return props.menuList })
   user-select:none;
 }
 .el-menu:not(.el-menu--collapse) {
-  width: 200px;
+  width: 220px;
 }
 </style>

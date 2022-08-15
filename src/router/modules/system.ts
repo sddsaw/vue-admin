@@ -1,12 +1,13 @@
 /**
  * @description: 系统设置模块
- * @return {*}
+ * @return {*}, RouterView
  */
-import { RouteRecordRaw, RouterView } from 'vue-router'
+import { RouteRecordRaw } from 'vue-router'
 const systemRouter: RouteRecordRaw = {
   path: '/system', // TODO 此处也不建议使用/ 如果没有/也是跟着父级的路由，因为父级是/所以是正常的
   name: 'system',
-  component: RouterView,
+  // component: RouterView,
+  component: () => import('@/layout/routerView/parent.vue'),
   redirect: '/system/menu',
   meta: {
     icon: 'material-symbols:settings-outline-rounded',

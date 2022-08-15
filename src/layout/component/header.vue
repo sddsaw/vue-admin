@@ -9,7 +9,8 @@ import NavBarsIndex from '@/layout/navBar/index.vue'
 </script>
 <style lang="scss" scoped>
 .layout-header {
-  padding: 0 !important;
   height: 85px;
+  background: #fff;
+  padding: 0 !important;
 }
   </style>

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import nprogress from 'nprogress'
+import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import userStore from '@/store/modules/user'
 // const files = import.meta.glob('./modules/*.ts')
@@ -10,7 +10,14 @@ import userStore from '@/store/modules/user'
 //   })
 // }
 import systemRouter from './modules/system'
-import menu from './modules/menu'
+import menuRouter from './modules/menu'
+import limitsRouter from './modules/limits'
+NProgress.configure({
+  speed: 500, // 速度设置毫秒ms
+  trickle: false, // 关闭进度条步进
+  trickleSpeed: 800, // 度条步进速度毫秒ms
+  showSpinner: false // 关闭进度环 默认true
+})
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -31,7 +38,8 @@ const routes: RouteRecordRaw[] = [
         }
       },
       systemRouter,
-      menu
+      menuRouter,
+      limitsRouter
     ]
   },
   {
@@ -56,9 +64,9 @@ router.beforeEach((to, from) => {
       query: { redirect: to.fullPath }
     }
   }
-  nprogress.start()
+  NProgress.start()
 })
 router.afterEach(() => {
-  nprogress.done()
+  NProgress.done()
 })
 export default router

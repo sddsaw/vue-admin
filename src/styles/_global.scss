@@ -1,5 +1,9 @@
 html,body,#app{
     //taliwind提供的css原子类
     @apply h-full w-full;
-  
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
+    font-size: 14px;
+    overflow: hidden;
+    position: relative;
+    background-color: #f8f8f8;
 }
