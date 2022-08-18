@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/sddsaw/vue-admin/compare/v0.0.2...v0.0.3) (2022-08-18)
+
+
+### Features
+
+* 动态路由 ([0daefe9](https://github.com/sddsaw/vue-admin/commit/0daefe99f9507d6229ab16856f93e34ef75f4b19))
+* 配置request请求loading ([8849529](https://github.com/sddsaw/vue-admin/commit/884952949d8d36145398f17604e823aa8a965379))
+* 添加router.t.ds ([555cb2a](https://github.com/sddsaw/vue-admin/commit/555cb2aa16072c137a7eee7a6fca68942d7d2cd1))
+* 添加token，pinia和持久话插件 ([2d494a1](https://github.com/sddsaw/vue-admin/commit/2d494a14254cdfb5287e63fa1447b0782491a9a6))
+* 优化菜单栏 ([f413027](https://github.com/sddsaw/vue-admin/commit/f41302795b6417e58625e7f23f1513035c06a370))
+
 ### [0.0.2](https://github.com/sddsaw/vue-admin/compare/v0.0.1...v0.0.2) (2022-08-03)
 
 
