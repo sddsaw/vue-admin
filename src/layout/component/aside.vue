@@ -14,12 +14,12 @@ import { menu } from '@/api/user'
 import Logo from '@/layout/logo/index.vue'
 import { RouteRecordRaw } from 'vue-router'
 import { onMounted, ref, computed } from 'vue'
-import { useCounterStore } from '@/store/index'
+import appConfigStore from '@/store/appConfig'
 import Vertical from '@/layout/navMenu/vertical.vue'
 const menuList = ref<RouteRecordRaw[]>([])
-const createUseCounterStore = useCounterStore()
+const createAppConfigStore = appConfigStore()
 onMounted(async () => { menuList.value = await menu() })
-const isCollapse = computed(() => { return createUseCounterStore.isCollapse })
+const isCollapse = computed(() => { return createAppConfigStore.isCollapse })
 </script>
 
 <style scoped lang="scss">

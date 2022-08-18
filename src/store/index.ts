@@ -1,10 +1,7 @@
-import { defineStore } from 'pinia'
-import { ref } from 'vue'
-export const useCounterStore = defineStore('counter', () => {
-  const isCollapse = ref(false)
-  function setIncrement () {
-    isCollapse.value = !isCollapse.value
-  }
+import { createPinia } from 'pinia'
 
-  return { isCollapse, setIncrement }
-})
+const pinia = createPinia()
+// import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
+// pinia.use(piniaPluginPersistedstate)
+export default pinia

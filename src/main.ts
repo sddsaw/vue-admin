@@ -4,10 +4,9 @@ import '@/styles/app.scss'
 import '@/styles/_global.scss'
 import router from './router/'
 // import '@purge-icons/generated'
-import { createPinia } from 'pinia'
+import pinia from '@/store/index'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 const app = createApp(App)
-// app.config.globalProperties.$baseColorfullLoading = baseColorfullLoading
 app.use(router).use(pinia).mount('#app')
+// app.config.globalProperties.$baseColorfullLoading = baseColorfullLoading

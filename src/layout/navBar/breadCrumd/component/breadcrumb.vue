@@ -27,13 +27,15 @@
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
-import { useCounterStore } from '@/store/index'
+import appConfigStore from '@/store/appConfig'
 import { ArrowRight, Expand, Fold } from '@element-plus/icons-vue'
 const router = useRouter()
-const countStore = useCounterStore()
-const { isCollapse } = storeToRefs(countStore)
+const store = appConfigStore()
+const { isCollapse } = storeToRefs(store)
 const fullPath = router.currentRoute.value.fullPath
-const setIconHadnel = () => { countStore.setIncrement() }
+const setIconHadnel = () => {
+  store.SEL_COLLAPSE()
+}
 const routes = computed(() => { return router.currentRoute.value.matched.filter(item => item.meta.title) })
 
 /**

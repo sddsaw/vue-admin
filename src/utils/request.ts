@@ -3,7 +3,7 @@ import { baseColorfullLoading } from '@/utils/common'
 
 import axios, { AxiosRequestConfig } from 'axios'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import userStore from '@/store/modules/user'
+import userStore from '@/store/userInfo'
 import router from '@/router/'
 const createUserStroe = userStore()
 const request = axios.create({

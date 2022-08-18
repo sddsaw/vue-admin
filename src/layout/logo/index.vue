@@ -10,9 +10,9 @@
 
 <script lang='ts' setup>
 import { computed } from 'vue'
-import { useCounterStore } from '@/store/index'
-const createUseCounterStore = useCounterStore()
-const isCollapse = computed(() => { return createUseCounterStore.isCollapse })
+import appConfigStore from '@/store/appConfig'
+const store = appConfigStore()
+const isCollapse = computed(() => { return store.isCollapse })
 const onThemeConfigChange = ():void => {
 
 }

@@ -5,7 +5,7 @@
 
 import { RouteRecordRaw } from 'vue-router'
 
-export default {
+const menuRouter: RouteRecordRaw = {
   path: '/menu',
   name: 'menu',
   // component: RouterView,
@@ -86,5 +86,5 @@ export default {
       }
     }
   ]
-} as RouteRecordRaw
-// TODO 这种是掩耳盗铃，是把该对象转换成RouteRecordRaw，是没有类型校验的
+}
+export default menuRouter

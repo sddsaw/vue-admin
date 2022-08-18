@@ -30,6 +30,7 @@ import Account from './computed/Account.vue'
 import ScanCode from './computed/ScanCode.vue'
 onMounted(() => {
   start()
+  console.log('---')
 })
 const isScanFlag = ref(false)
 
@@ -47,11 +48,13 @@ const checkMode = (isScan:boolean) => {
 
 canvas {
   position: absolute;
-  z-index: -1;
+  // z-index: -1;
   top: 0;
   left: 0;
 }
-
+.content{
+  z-index: 1;
+}
 .common-layout {
   display: grid;
   place-items: center;

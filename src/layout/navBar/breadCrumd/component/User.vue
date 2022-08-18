@@ -22,7 +22,7 @@
 
 <script lang='ts' setup>
 import { ArrowDown } from '@element-plus/icons-vue'
-import userStore from '@/store/modules/user'
+import userStore from '@/store/userInfo'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { logOut } from '@/api/user'
@@ -35,10 +35,10 @@ const userInfo = createUserStroe.userInfo
  * @return {*}
  */
 const handelLogout = ():void => {
-  ElMessageBox.confirm('是否要退出登录?', '退出提示', {
-    confirmButtonText: 'OK',
-    cancelButtonText: 'Cancel',
-    type: 'warning'
+  ElMessageBox.confirm('是否要退出登录?', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    buttonSize: 'default'
   }).then(async ():Promise<void> => {
     const res = await logOut()
     console.log(res)

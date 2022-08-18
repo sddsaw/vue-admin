@@ -31,15 +31,16 @@
   </el-menu>
 </template>
 <script lang="ts" setup>
-import { useCounterStore } from '@/store/index'
-import { storeToRefs } from 'pinia'
-import { RouteRecordRaw, useRoute } from 'vue-router'
 import { computed } from 'vue'
-import AppIcon from '@/components/AppIcon/index.vue'
+import { storeToRefs } from 'pinia'
+import appConfigStore from '@/store/appConfig'
 import SubItem from '@/layout/navMenu/subItem.vue'
+import AppIcon from '@/components/AppIcon/index.vue'
+import { RouteRecordRaw, useRoute } from 'vue-router'
 const route = useRoute()
-const countStore = useCounterStore()
-const { isCollapse } = storeToRefs(countStore)
+const store = appConfigStore()
+const { isCollapse } = storeToRefs(store)
+
 interface Props {
   menuList:RouteRecordRaw[]
 }
