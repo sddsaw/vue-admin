@@ -4,27 +4,35 @@
  */
 
 import { RouteRecordRaw } from 'vue-router'
-
+const routerView = import('@/layout/routerView/parent.vue')
 const menuRouter: RouteRecordRaw = {
   path: '/menu',
   name: 'menu',
-  // component: RouterView,
-  component: () => import('@/layout/routerView/parent.vue'),
-  redirect: '/menu/menu1/menu11',
+  component: () => routerView,
+  redirect: '/menu/menu1',
   meta: {
     title: '菜单嵌套',
-    icon: 'ep:menu'
+    isLink: '',
+    isHide: false,
+    isAffix: false,
+    isIframe: false,
+    isKeepAlive: true,
+    icon: 'material-symbols:settings-outline-rounded'
   },
   children: [
     {
       path: '/menu/menu1',
       name: 'menu1',
-      // component: RouterView,
       component: () => import('@/layout/routerView/parent.vue'),
       redirect: '/menu/menu1/menu11',
       meta: {
         title: '菜单1',
-        icon: 'ep:menu'
+        isLink: '',
+        isHide: false,
+        isAffix: false,
+        isIframe: false,
+        isKeepAlive: true,
+        icon: 'material-symbols:settings-outline-rounded'
       },
       children: [
         {
@@ -33,16 +41,27 @@ const menuRouter: RouteRecordRaw = {
           component: () => import('@/views/menu/menu1/menu11/index.vue'),
           meta: {
             title: '菜单11',
-            icon: 'iconfont icon-caidan'
+            isLink: '',
+            isHide: false,
+            isAffix: false,
+            isIframe: false,
+            isKeepAlive: true,
+            icon: 'material-symbols:settings-outline-rounded'
           }
         },
         {
           path: '/menu/menu1/menu12',
           name: 'menu12',
           component: () => import('@/layout/routerView/parent.vue'),
+          redirect: '/menu/menu1/menu12/menu121',
           meta: {
             title: '菜单12',
-            icon: 'iconfont icon-caidan'
+            isLink: '',
+            isHide: false,
+            isAffix: false,
+            isIframe: false,
+            isKeepAlive: true,
+            icon: 'material-symbols:settings-outline-rounded'
           },
           children: [
             {
@@ -51,7 +70,12 @@ const menuRouter: RouteRecordRaw = {
               component: () => import('@/views/menu/menu1/menu12/menu121/index.vue'),
               meta: {
                 title: '菜单121',
-                icon: 'iconfont icon-caidan'
+                isLink: '',
+                isHide: false,
+                isAffix: false,
+                isIframe: false,
+                isKeepAlive: true,
+                icon: 'material-symbols:settings-outline-rounded'
               }
             },
             {
@@ -60,7 +84,12 @@ const menuRouter: RouteRecordRaw = {
               component: () => import('@/views/menu/menu1/menu12/menu122/index.vue'),
               meta: {
                 title: '菜单122',
-                icon: 'iconfont icon-caidan'
+                isLink: '',
+                isHide: false,
+                isAffix: false,
+                isIframe: false,
+                isKeepAlive: true,
+                icon: 'material-symbols:settings-outline-rounded'
               }
             }
           ]
@@ -71,7 +100,12 @@ const menuRouter: RouteRecordRaw = {
           component: () => import('@/views/menu/menu1/menu13/index.vue'),
           meta: {
             title: '菜单13',
-            icon: 'iconfont icon-caidan'
+            isLink: '',
+            isHide: false,
+            isAffix: false,
+            isIframe: false,
+            isKeepAlive: true,
+            icon: 'material-symbols:settings-outline-rounded'
           }
         }
       ]
@@ -82,7 +116,12 @@ const menuRouter: RouteRecordRaw = {
       component: () => import('@/views/menu/menu2/index.vue'),
       meta: {
         title: '菜单2',
-        icon: 'iconfont icon-caidan'
+        isLink: '',
+        isHide: false,
+        isAffix: false,
+        isIframe: false,
+        isKeepAlive: true,
+        icon: 'material-symbols:settings-outline-rounded'
       }
     }
   ]

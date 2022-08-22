@@ -39,3 +39,14 @@ export const menu = () => {
     url: '/mock/api/menu'
   })
 }
+/**
+ * @description: 获取权限菜单
+ * @return {*}
+ */
+export const getmenu = () => {
+  return request({
+    method: 'GET',
+    loading: true,
+    url: '/mock/api/menu'
+  })
+}

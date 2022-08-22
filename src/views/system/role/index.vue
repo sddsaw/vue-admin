@@ -1,5 +1,7 @@
 <template>
-  role
+  <div>
+    role
+  </div>
 </template>
 
 <script lang='ts' setup>

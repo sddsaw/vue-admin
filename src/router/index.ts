@@ -2,13 +2,16 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import userStore from '@/store/userInfo'
-const files = import.meta.glob('./modules/*.ts')
-const modulesFile :any = []
-for (const dire in files) {
-  files[dire]().then((res) => {
-    modulesFile.push(res.default)
-  })
-}
+// const files = import.meta.glob('./modules/*.ts')
+// const modulesFile :any = []
+// for (const dire in files) {
+//   files[dire]().then((res) => {
+//     modulesFile.push(res.default)
+//   })
+// }
+import limitsRouter from './modules/limits'
+import menuRouter from './modules/menu'
+import systemRouter from './modules/system'
 NProgress.configure({
   speed: 500, // 速度设置毫秒ms
   trickle: false, // 关闭进度条步进
@@ -34,7 +37,9 @@ const routes: RouteRecordRaw[] = [
           title: '首页'
         }
       },
-      ...modulesFile
+      limitsRouter,
+      menuRouter,
+      systemRouter
     ]
   },
   {

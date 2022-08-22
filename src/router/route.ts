@@ -29,26 +29,32 @@ import systemRouter from './modules/system'
  * @description 定义动态路由
  * @returns
  */
+const layout = import('@/layout/index.vue')
 export const dynamicRoutes: RouteRecordRaw[] = [
   {
     path: '/',
     name: '/',
-    component: () => import('@/layout/index.vue'),
-    redirect: '/',
+    component: () => layout,
+    redirect: '/home',
     meta: {
       requiresAuth: true,
-      title: '首页'
+      isKeepAlive: true
     },
     children: [
       {
-        path: '',
+        path: '/home',
         name: 'home',
         component: () => import('@/views/home/index.vue'),
         meta: {
-          title: '首页'
+          title: '首页',
+          isLink: '',
+          isHide: false,
+          isAffix: true,
+          isIframe: false,
+          isKeepAlive: true,
+          icon: 'iconfont icon-shouye'
         }
       },
-      // ...modulesFile
       limitsRouter,
       menuRouter,
       systemRouter
@@ -79,20 +85,20 @@ export const staticRoutes: Array<RouteRecordRaw> = [
  */
 export const notFoundAndNoPower: Array<RouteRecordRaw> = [
   {
-    path: '/:path(.*)*',
-    name: 'notFound',
-    component: () => import('@/views/error/404.vue'),
-    meta: {
-      title: '404',
-      isHide: true
-    }
-  },
-  {
     path: '/401',
     name: 'noPower',
     component: () => import('@/views/error/401.vue'),
     meta: {
       title: '401',
+      isHide: true
+    }
+  },
+  {
+    path: '/:path(.*)*',
+    name: 'notFound',
+    component: () => import('@/views/error/404.vue'),
+    meta: {
+      title: '404',
       isHide: true
     }
   }

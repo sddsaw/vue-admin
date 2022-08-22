@@ -1,5 +1,7 @@
 <template>
-  user
+  <div>
+    user
+  </div>
 </template>
 
 <script lang='ts' setup>

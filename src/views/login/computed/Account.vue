@@ -39,7 +39,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { Lock, User } from '@element-plus/icons-vue'
 import AppIcon from '@/components/AppIcon/index.vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import { initBackEndControlRoutes } from '@/router/backEnd'
+// import { initBackEndControlRoutes } from '@/router/backEnd'
 
 const router = useRouter()
 const route = useRoute()
@@ -80,7 +80,7 @@ const handelSubmit = async (formEl: FormInstance | undefined) => {
   loading.value = true
   const res = await getLogin(parmas)
   createUserStore.userInfo = res
-  await initBackEndControlRoutes()
+  // await initBackEndControlRoutes()
   loginSuccess()
 }
 

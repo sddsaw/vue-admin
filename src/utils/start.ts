@@ -1,3 +1,4 @@
+/* eslint-disable no-new */
 export function start () {
   // 宇宙特效
   'use strict'
@@ -6,7 +7,7 @@ export function start () {
   const w = (canvas.width = window.innerWidth)
   const h = (canvas.height = window.innerHeight)
   const hue = 217
-  const stars = []
+  const stars:any = []
   let count = 0
   const maxStars = 1069 // 星星数量
 
@@ -28,7 +29,7 @@ export function start () {
 
   // End cache
 
-  function random (min, max) {
+  function random (min:any, max?:any) {
     if (arguments.length < 2) {
       max = min
       min = 0
@@ -43,14 +44,14 @@ export function start () {
     return Math.floor(Math.random() * (max - min + 1)) + min
   }
 
-  function maxOrbit (x, y) {
+  function maxOrbit (x:any, y:any) {
     const max = Math.max(x, y)
     const diameter = Math.round(Math.sqrt(max * max + max * max))
     return diameter / 2
     // 星星移动范围，值越大范围越小，
   }
 
-  const Star = function () {
+  const Star = function (this: any) {
     this.orbitRadius = random(maxOrbit(w, h))
     this.radius = random(20, this.orbitRadius) / 8
     // 星星大小
@@ -82,7 +83,7 @@ export function start () {
   }
 
   for (let i = 0; i < maxStars; i++) {
-    new Star() as any
+    new Star()
   }
 
   function animation () {

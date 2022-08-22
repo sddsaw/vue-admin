@@ -1,5 +1,7 @@
 <template>
-  前端控制页面
+  <div>
+    前端控制页面
+  </div>
 </template>
 
 <script lang='ts' setup>

@@ -1,5 +1,7 @@
 <template>
-  menu
+  <div>
+    menu
+  </div>
 </template>
 
 <script lang='ts' setup>

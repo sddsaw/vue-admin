@@ -1,5 +1,7 @@
 <template>
-  菜单2
+  <div>
+    菜单2
+  </div>
 </template>
 
 <script lang='ts' setup>

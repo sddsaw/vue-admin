@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
-
+const routerView = import('@/layout/routerView/parent.vue')
 /**
  * @description: 权限管理模块
  * @return {*}
@@ -7,24 +7,31 @@ import { RouteRecordRaw } from 'vue-router'
 const limitsRouter : RouteRecordRaw = {
   path: '/limits',
   name: 'limits',
-  // component: RouterView,
-  component: () => import('@/layout/routerView/parent.vue'),
-
+  component: () => routerView,
   redirect: '/limits/frontEnd',
   meta: {
     title: '权限管理',
-    icon: 'ri:shield-keyhole-line'
+    isLink: '',
+    isHide: false,
+    isAffix: false,
+    isIframe: false,
+    isKeepAlive: true,
+    icon: 'material-symbols:settings-outline-rounded'
   },
   children: [
     {
       path: '/limits/frontEnd',
       name: 'limitsFrontEnd',
-      // component: RouterView,
-      component: () => import('@/layout/routerView/parent.vue'),
+      component: () => routerView,
       redirect: '/limits/frontEnd/page',
       meta: {
         title: '前端控制',
-        icon: 'ri:shield-keyhole-line'
+        isLink: '',
+        isHide: false,
+        isAffix: false,
+        isIframe: false,
+        isKeepAlive: true,
+        icon: 'material-symbols:settings-outline-rounded'
       },
       children: [
         {
@@ -33,7 +40,12 @@ const limitsRouter : RouteRecordRaw = {
           component: () => import('@/views/limits/frontEnd/page/index.vue'),
           meta: {
             title: '页面权限',
-            icon: 'iconoir:multiple-pages-empty'
+            isLink: '',
+            isHide: false,
+            isAffix: false,
+            isIframe: false,
+            isKeepAlive: true,
+            icon: 'material-symbols:settings-outline-rounded'
           }
         },
         {
@@ -42,7 +54,12 @@ const limitsRouter : RouteRecordRaw = {
           component: () => import('@/views/limits/frontEnd/btn/index.vue'),
           meta: {
             title: '按钮权限',
-            icon: 'mdi:button-pointer'
+            isLink: '',
+            isHide: false,
+            isAffix: false,
+            isIframe: false,
+            isKeepAlive: true,
+            icon: 'material-symbols:settings-outline-rounded'
           }
         }
       ]
@@ -50,10 +67,16 @@ const limitsRouter : RouteRecordRaw = {
     {
       path: '/limits/backEnd',
       name: 'limitsBackEnd',
-      component: () => import('@/layout/routerView/parent.vue'),
+      redirect: '/limits/backEnd/page',
+      component: () => routerView,
       meta: {
         title: '后端控制',
-        icon: 'ri:shield-keyhole-line'
+        isLink: '',
+        isHide: false,
+        isAffix: false,
+        isIframe: false,
+        isKeepAlive: true,
+        icon: 'material-symbols:settings-outline-rounded'
       },
       children: [
         {
@@ -62,7 +85,12 @@ const limitsRouter : RouteRecordRaw = {
           component: () => import('@/views/limits/backEnd/page/index.vue'),
           meta: {
             title: '页面权限',
-            icon: 'iconoir:multiple-pages-empty'
+            isLink: '',
+            isHide: false,
+            isAffix: false,
+            isIframe: false,
+            isKeepAlive: true,
+            icon: 'material-symbols:settings-outline-rounded'
           }
         }
       ]

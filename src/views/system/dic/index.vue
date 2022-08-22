@@ -1,5 +1,7 @@
 <template>
-  dic
+  <div>
+    dic
+  </div>
 </template>
 
 <script lang='ts' setup>
