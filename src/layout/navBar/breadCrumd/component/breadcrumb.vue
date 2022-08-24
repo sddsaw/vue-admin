@@ -36,7 +36,9 @@ const fullPath = router.currentRoute.value.fullPath
 const setIconHadnel = () => {
   store.SEL_COLLAPSE()
 }
-const routes = computed(() => { return router.currentRoute.value.matched.filter(item => item.meta.title) })
+const routes = computed(() => {
+  return router.currentRoute.value.matched.filter(item => item.meta.title)
+})
 
 /**
  * @description: 此处路由不可重定向

@@ -1,5 +1,5 @@
 import { MockMethod } from 'vite-plugin-mock'
-const adminMenu = {
+const testMenu = {
   code: 200,
   success: true,
   data: [
@@ -38,6 +38,34 @@ const adminMenu = {
           component: 'system/menu/index',
           meta: {
             title: '菜单管理',
+            isLink: '',
+            isHide: false,
+            isAffix: false,
+            isIframe: false,
+            isKeepAlive: true,
+            icon: 'material-symbols:settings-outline-rounded'
+          }
+        },
+        {
+          path: '/system/role',
+          name: 'systemRole',
+          component: 'system/role/index',
+          meta: {
+            title: '角色管理',
+            isLink: '',
+            isHide: false,
+            isAffix: false,
+            isIframe: false,
+            isKeepAlive: true,
+            icon: 'material-symbols:settings-outline-rounded'
+          }
+        },
+        {
+          path: '/system/dept',
+          name: 'systemDept',
+          component: 'system/dept/index',
+          meta: {
+            title: '部门管理',
             isLink: '',
             isHide: false,
             isAffix: false,
@@ -234,9 +262,9 @@ const adminMenu = {
 }
 export default [
   {
-    url: '/mock/api/getAdminMenu',
+    url: '/mock/api/getTestMenu',
     method: 'post',
     statusCode: 200,
-    response: () => adminMenu
+    response: () => testMenu
   }
 ] as MockMethod[]

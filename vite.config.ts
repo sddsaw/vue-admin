@@ -57,18 +57,19 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
           additionalData: '@import "@/styles/variables.scss";'
         }
       }
-    }
+    },
     // TODO 代理
-    // server: {
-    //   proxy: {
-    //     // TODO 如果使用代理 baseUrl不需要设置
-    //     '/api': {
-    //       target: 'http://jsonplaceholder.typicode.com', // 代理的目标地址
-    //       changeOrigin: true, // 兼用虚拟主机
-    //       rewrite: (path) => path.replace(/^\/api/, '')// 路径重写
-    //     }
-    //   }
-    // }
+    server: {
+      host: '0.0.0.0',
+      proxy: {
+        // TODO 如果使用代理 baseUrl不需要设置
+        '/api': {
+          target: 'http://jsonplaceholder.typicode.com', // 代理的目标地址
+          changeOrigin: true, // 兼用虚拟主机
+          rewrite: (path) => path.replace(/^\/api/, '')// 路径重写
+        }
+      }
+    }
   }
 }
 // export default defineConfig({

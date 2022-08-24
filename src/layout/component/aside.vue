@@ -10,16 +10,38 @@
 </template>
 
 <script lang='ts' setup>
-import { menu } from '@/api/user'
+import { storeToRefs } from 'pinia'
 import Logo from '@/layout/logo/index.vue'
 import { RouteRecordRaw } from 'vue-router'
-import { onMounted, ref, computed } from 'vue'
+import useRoutesList from '@/store/routesList'
+import { onBeforeMount, ref, computed } from 'vue'
 import appConfigStore from '@/store/appConfig'
 import Vertical from '@/layout/navMenu/vertical.vue'
 const menuList = ref<RouteRecordRaw[]>([])
 const createAppConfigStore = appConfigStore()
-onMounted(async () => { menuList.value = await menu() })
 const isCollapse = computed(() => { return createAppConfigStore.isCollapse })
+const stores = useRoutesList()
+const { routesList } = storeToRefs(stores)
+
+// 设置/过滤路由（非静态路由/是否显示在菜单中）
+onBeforeMount(() => {
+  setFilterRoutes()
+})
+const setFilterRoutes = () => {
+  menuList.value = filterRoutesFun(routesList.value)
+}
+/**
+ * @description: 路由过滤递归函数
+ * @param {*} arr
+ * @return {*}
+ */
+const filterRoutesFun = (arr: Array<string>) => {
+  return arr.filter((item: any) => !item.meta.isHide).map((item: any) => {
+    item = Object.assign({}, item)
+    if (item.children) item.children = filterRoutesFun(item.children)
+    return item
+  })
+}
 </script>
 
 <style scoped lang="scss">

@@ -9,7 +9,7 @@ import { IKeepAliveNamesState } from './types'
  * @methods delOthersCachedViews 右键菜单`关闭其它`，删除要缓存的路由 names（关闭 Tagsview）
  * @methods delAllCachedViews 右键菜单`全部关闭`，删除要缓存的路由 names（关闭 Tagsview）
  */
-export const useKeepALiveNamesStroe = defineStore('keepALiveNames', {
+const useKeepALiveNamesStroe = defineStore('keepALiveNames', {
   state: (): IKeepAliveNamesState => ({
     keepAliveNames: [],
     cachedViews: []
@@ -35,3 +35,4 @@ export const useKeepALiveNamesStroe = defineStore('keepALiveNames', {
     }
   }
 })
+export default useKeepALiveNamesStroe
