@@ -10,12 +10,10 @@
       <div>
         <TransitionGroup tag="ul" name="fade">
           <el-breadcrumb-item
-            v-for="(item,index) in routes"
+            v-for="(item,) in createData.breadcrumbList"
             :key="item.path"
-            :class="index !=routes.length -1 ? 'cursor' :''"
-            @click="onBreadcrumbClick(item,index != routes.length -1)"
           >
-            {{ item.meta.title }}
+            {{ item.meta.title || item.meta.tagsViewName }}
           </el-breadcrumb-item>
         </TransitionGroup>
       </div>
@@ -24,34 +22,79 @@
 </template>
 
 <script lang='ts' setup>
-import { computed } from 'vue'
+// computed,
+// 定义接口来定义对象的类型
+import { reactive, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useRouter } from 'vue-router'
+// useRouter,
+import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import appConfigStore from '@/store/appConfig'
 import { ArrowRight, Expand, Fold } from '@element-plus/icons-vue'
-const router = useRouter()
+import useRoutesList from '@/store/routesList'
+const stores = useRoutesList()
+const { routesList } = storeToRefs(stores)
+interface BreadcrumbState {
+  breadcrumbList: Array<any>;
+  routeSplit: Array<string>;
+  routeSplitFirst: string;
+  routeSplitIndex: number;
+}
+// const router = useRouter()
+const route = useRoute()
+
 const store = appConfigStore()
 const { isCollapse } = storeToRefs(store)
-const fullPath = router.currentRoute.value.fullPath
+
+const createData = reactive<BreadcrumbState>({
+  breadcrumbList: [],
+  routeSplit: [],
+  routeSplitFirst: '',
+  routeSplitIndex: 1
+})
 const setIconHadnel = () => {
   store.SEL_COLLAPSE()
 }
-const routes = computed(() => {
-  return router.currentRoute.value.matched.filter(item => item.meta.title)
-})
 
 /**
- * @description: 此处路由不可重定向
- * @return {* RouteLocationMatched}
+ * @description:处理面包屑数据
+ * @return {*}
  */
-const onBreadcrumbClick = (item:any, flag:boolean):void => {
-  const { redirect, path } = item
-  // TODO 如果当前的路由和redirect路由一致时,禁止跳转
-  if (flag && fullPath !== redirect) {
-    if (redirect) router.push(redirect)
-    else router.push(path)
-  }
+const getBreadcrumbList = (arr: Array<string>) => {
+  arr.forEach((item: any) => {
+    createData.routeSplit.forEach((v: any, k: number, arrs: any) => {
+      if (createData.routeSplitFirst === item.path) {
+        createData.routeSplitFirst += `/${arrs[createData.routeSplitIndex]}`
+        createData.breadcrumbList.push(item)
+        console.log(createData.breadcrumbList)
+        createData.routeSplitIndex++
+        if (item.children) getBreadcrumbList(item.children)
+      }
+    })
+  })
 }
+/**
+ * @description: 当前路由字符串切割成数组，并删除第一项空内容
+ * @param {*} path
+ * @return {*}
+ */
+const initRouteSplit = (path: string) => {
+  createData.breadcrumbList = [routesList.value[0]]
+  createData.routeSplit = path.split('/')
+  createData.routeSplit.shift()
+  createData.routeSplitFirst = `/${createData.routeSplit[0]}`
+  createData.routeSplitIndex = 1
+  getBreadcrumbList(routesList.value)
+  if (route.name === 'home' || (route.name === 'notFound' && createData.breadcrumbList.length > 1)) createData.breadcrumbList.shift()
+  if (createData.breadcrumbList.length > 0) createData.breadcrumbList[createData.breadcrumbList.length - 1].meta.tagsViewName = route.meta.title
+}
+// 页面加载时
+onMounted(() => {
+  initRouteSplit(route.path)
+})
+// 路由更新时
+onBeforeRouteUpdate((to) => {
+  initRouteSplit(to.path)
+})
 </script>
 <style lang="scss" scoped>
 .el-icon{

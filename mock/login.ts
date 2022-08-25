@@ -9,6 +9,7 @@ const userInfo = {
     avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
     userName: '管理员',
     account: 'admin',
+    authBtnList: [1, 2, 3],
     expiresIn: 2600000
   },
   msg: '操作成功',

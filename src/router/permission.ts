@@ -8,8 +8,8 @@ import { dynamicRoutes, notFoundAndNoPower } from '@/router/route'
 import { formatTwoStageRoutes, formatFlatteningRoutes, router } from '@/router/index'
 import useRoutesList from '@/store/routesList'
 import { useTagsViewRoutes } from '@/store/tagsViewRoutes'
-import { getAdminMenu } from '@/api/menu'
-// import { getTestMenu } from '@/api/menu'
+// import { getAdminMenu } from '@/api/menu'
+import { getTestMenu } from '@/api/menu'
 
 const layouModules: any = import.meta.glob('../layout/routerView/*.{vue,tsx}')
 const viewsModules: any = import.meta.glob('../views/**/*.{vue,tsx}')
@@ -44,7 +44,7 @@ export async function initBackEndControlRoutes () {
   // https://gitee.com/lyt-top/vue-next-admin/issues/I5F1HP
   // await useUserInfo().setUserInfos()
   // 获取路由菜单数据
-  const res = await getAdminMenu()
+  const res = await getTestMenu()
 
   // 处理路由（component），替换 dynamicRoutes（/@/router/route）第一个顶级 children 的路由
   dynamicRoutes[0].children = await backEndComponent(res)

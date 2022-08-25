@@ -8,7 +8,7 @@ const testMenu = {
       name: 'home',
       component: 'home/index',
       meta: {
-        title: '首页',
+        title: '首页1',
         isLink: '',
         isHide: false,
         isAffix: true,
@@ -263,8 +263,10 @@ const testMenu = {
 export default [
   {
     url: '/mock/api/getTestMenu',
-    method: 'post',
+    method: 'get',
     statusCode: 200,
-    response: () => testMenu
+    response: () => {
+      return testMenu
+    }
   }
 ] as MockMethod[]

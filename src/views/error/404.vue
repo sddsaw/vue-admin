@@ -1,5 +1,5 @@
 <template>
-  <div class="error layout-view-bg-white" :style="{ height: `calc(100vh - 85px` }">
+  <div class="error layout-view-bg-white" :style="{ height: `calc(100vh - 120px` }">
     <div class="error-flex">
       <div class="left">
         <div class="left-item">

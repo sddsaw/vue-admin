@@ -6,6 +6,7 @@ export interface ILoginInfo {
   userName: string,
   account: string,
   expiresIn: number// token有效期
+  authBtnList:Array<number>// 按钮权限集
 }
 export type LoginParams = {
   userName:string;

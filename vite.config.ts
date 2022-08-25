@@ -16,7 +16,11 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
     plugins: [
       vue(),
       vueJsx({}),
-      eslintPlugin(),
+      eslintPlugin({
+        include: ['src/**/*.js', 'src/**/*.vue', 'src/**/*.jsx', 'src/**/*.ts'],
+        exclude: ['./node_modules/**'],
+        cache: false
+      }),
       vueSetupExtend(),
       ElementPlus({
         // options
@@ -60,6 +64,8 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
     },
     // TODO 代理
     server: {
+      port: 8080,
+      strictPort: true,
       host: '0.0.0.0',
       proxy: {
         // TODO 如果使用代理 baseUrl不需要设置
