@@ -4,7 +4,10 @@ import { IAppConfig } from './types'
 const appConfigStore = defineStore('appConfig', {
   state: ():IAppConfig => ({
     isCollapse: false,
-    isRequestRoutes: true
+    isRequestRoutes: true,
+    isCacheTagsView: true,
+    isSortableTagsView: true,
+    isShareTagsView: true
   }),
   getters: {
 

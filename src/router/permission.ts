@@ -7,7 +7,7 @@ import useUserInfo from '@/store/userInfo'
 import { dynamicRoutes, notFoundAndNoPower } from '@/router/route'
 import { formatTwoStageRoutes, formatFlatteningRoutes, router } from '@/router/index'
 import useRoutesList from '@/store/routesList'
-import { useTagsViewRoutes } from '@/store/tagsViewRoutes'
+import useTagsViewRoutes from '@/store/tagsViewRoutes'
 // import { getAdminMenu } from '@/api/menu'
 import { getTestMenu } from '@/api/menu'
 

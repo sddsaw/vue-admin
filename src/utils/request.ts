@@ -1,6 +1,6 @@
 // import { getCurrentInstance } from 'vue'
 import { baseColorfullLoading } from '@/utils/common'
-
+import pinia from '@/store'
 import axios, { AxiosRequestConfig } from 'axios'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import userStore from '@/store/userInfo'
@@ -16,7 +16,7 @@ const request = axios.create({
 // eslint-disable-next-line no-unused-vars
 let loadingInstance :any
 request.interceptors.request.use(config => {
-  const createUserStroe = userStore()
+  const createUserStroe = userStore(pinia)
   if (createUserStroe.userInfo && createUserStroe.userInfo.accessToken) {
     // TODO 加此判断是因为headers里面是有可能为null，校验不过
     if (config && config?.headers) config.headers.Authorization = `Basic ${createUserStroe.userInfo.accessToken}`

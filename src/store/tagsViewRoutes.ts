@@ -7,18 +7,19 @@ import { ITagsViewRoutesState } from './types'
  * @methods setTagsViewRoutes 设置 TagsView 路由列表
  * @methods setCurrenFullscreen 设置开启/关闭全屏时的 boolean 状态
  */
-export const useTagsViewRoutes = defineStore('tagsViewRoutes', {
+const useTagsViewRoutes = defineStore('tagsViewRoutes', {
   state: (): ITagsViewRoutesState => ({
     tagsViewRoutes: [],
     isTagsViewCurrenFull: false
   }),
   actions: {
-    async setTagsViewRoutes (data: Array<string>) {
+    setTagsViewRoutes (data: Array<string>) {
       this.tagsViewRoutes = data
     },
     setCurrenFullscreen (bool: Boolean) {
-      // Session.set('isTagsViewCurrenFull', bool)
       this.isTagsViewCurrenFull = bool
     }
   }
+
 })
+export default useTagsViewRoutes

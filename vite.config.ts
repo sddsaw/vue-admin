@@ -14,7 +14,9 @@ import path from 'path'
 export default ({ command }: ConfigEnv): UserConfigExport => {
   return {
     plugins: [
-      vue(),
+      vue(
+
+      ),
       vueJsx({}),
       eslintPlugin({
         include: ['src/**/*.js', 'src/**/*.vue', 'src/**/*.jsx', 'src/**/*.ts'],

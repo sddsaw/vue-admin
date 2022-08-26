@@ -3,7 +3,7 @@ export function start () {
   // 宇宙特效
   'use strict'
   const canvas:any = document.getElementById('canvas')
-  const ctx = canvas.getContext('2d')
+  const ctx:any = canvas.getContext('2d')
   const w = (canvas.width = window.innerWidth)
   const h = (canvas.height = window.innerHeight)
   const hue = 217
