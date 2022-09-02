@@ -68,7 +68,7 @@ const testMenu = {
             title: '部门管理',
             isLink: '',
             isHide: false,
-            isAffix: false,
+            isAffix: true,
             isIframe: false,
             isKeepAlive: true,
             icon: 'material-symbols:settings-outline-rounded'
@@ -80,6 +80,20 @@ const testMenu = {
           component: 'system/user/index',
           meta: {
             title: '用户管理',
+            isLink: '',
+            isHide: false,
+            isAffix: false,
+            isIframe: false,
+            isKeepAlive: true,
+            icon: 'material-symbols:settings-outline-rounded'
+          }
+        },
+        {
+          path: '/system/log',
+          name: 'systemLog',
+          component: 'system/log/index',
+          meta: {
+            title: '日志管理',
             isLink: '',
             isHide: false,
             isAffix: false,

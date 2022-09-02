@@ -71,6 +71,8 @@ export function formatTwoStageRoutes (arr: any) {
 // 路由加载前
 router.beforeEach(async (to, from, next) => {
   NProgress.configure({ showSpinner: false })
+  document.title = to.meta.title || ''
+
   if (to.meta.title) NProgress.start()
   const store = userStore(pinia)
   const { userInfo } = storeToRefs(store)

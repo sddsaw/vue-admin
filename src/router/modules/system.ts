@@ -88,6 +88,20 @@ const systemRouter: RouteRecordRaw = {
         isKeepAlive: true,
         icon: 'material-symbols:settings-outline-rounded'
       }
+    },
+    {
+      path: '/system/log',
+      name: 'systemLog',
+      component: () => import('@/views/system/log/index.vue'),
+      meta: {
+        title: '日志管理',
+        isLink: '',
+        isHide: false,
+        isAffix: false,
+        isIframe: false,
+        isKeepAlive: true,
+        icon: 'material-symbols:settings-outline-rounded'
+      }
     }
   ]
 }

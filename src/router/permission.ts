@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia'
 import pinia from '@/store/index'
 import useUserInfo from '@/store/userInfo'
 // import { Session } from '@/utils/storage'
-// import { NextLoading } from '@/utils/loading'
+// import NextLoading from '@/utils/loading'
 import { dynamicRoutes, notFoundAndNoPower } from '@/router/route'
 import { formatTwoStageRoutes, formatFlatteningRoutes, router } from '@/router/index'
 import useRoutesList from '@/store/routesList'
@@ -83,7 +83,6 @@ export function setCacheTagsViewRoutes () {
 export function setFilterRouteEnd () {
   const filterRouteEnd: any = formatTwoStageRoutes(formatFlatteningRoutes(dynamicRoutes))
   filterRouteEnd[0].children = [...filterRouteEnd[0].children, ...notFoundAndNoPower]
-  console.log(filterRouteEnd)
   return filterRouteEnd
 }
 
@@ -95,7 +94,6 @@ export function setFilterRouteEnd () {
  */
 export async function setAddRoute () {
   await setFilterRouteEnd().forEach((route: RouteRecordRaw) => {
-    console.log(route)
     router.addRoute(route)
   })
 }

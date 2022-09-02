@@ -65,7 +65,6 @@ const getBreadcrumbList = (arr: Array<string>) => {
       if (createData.routeSplitFirst === item.path) {
         createData.routeSplitFirst += `/${arrs[createData.routeSplitIndex]}`
         createData.breadcrumbList.push(item)
-        console.log(createData.breadcrumbList)
         createData.routeSplitIndex++
         if (item.children) getBreadcrumbList(item.children)
       }

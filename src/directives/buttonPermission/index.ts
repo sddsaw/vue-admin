@@ -12,11 +12,9 @@ import type { DirectiveBinding } from 'vue'
 export const auth:Directive = {
   mounted (el: HTMLElement, binding: DirectiveBinding) {
     const { value } = binding
-    console.log(value)
     if (value) {
       const stores = useUserInfo(pinia)
       const { userInfo } = storeToRefs(stores)
-      console.log(userInfo?.value?.authBtnList)
       if (!userInfo?.value?.authBtnList.some((v: string) => v === value)) el?.parentNode.removeChild(el)
     } else {
       throw new Error("need roles! Like v-auth=\"['admin','test']\"")

@@ -14,18 +14,12 @@
           :ref="(el) => { if (el) tagsRefs[index] = el }"
         >
           <span>{{ item.meta.title }}</span>
-        </li>
-        <li
-          v-for="(item, index) in state.tagsViewList"
-          :key="index"
-          class="layout-navbars-tagsview-ul-li"
-          :data-url="item.url"
-          :class="{ 'is-active': isActive(item) }"
-          @contextmenu.prevent="onContextmenu(item, $event)"
-          @click="onTagsClick(item, index)"
-          :ref="(el) => { if (el) tagsRefs[index] = el }"
-        >
-          <span>{{ item.meta.title }}</span>
+          <app-icon
+            icon="ep:close"
+            class="layout-navbars-tagsview-ul-li-icon layout-icon-three"
+            v-if="!item.meta.isAffix"
+            @click.stop="closeCurrentTagsView(isShareTagsView ? item.path : item.url)"
+          />
         </li>
       </ul>
     </el-scrollbar>
@@ -41,18 +35,16 @@ import useTagsViewRoutes from '@/store/tagsViewRoutes'
 import appConfig from '@/store/appConfig'
 import useKeepALiveNames from '@/store/keepAliveNames'
 import { isObjectValueEqual } from '@/utils/arrayOperation'
-
+import AppIcon from '@/components/AppIcon/index.vue'
 import { storeToRefs } from 'pinia'
 import { Session } from '@/utils/storage'
 const { proxy } = getCurrentInstance() as any
 const tagsRefs = ref<any[]>([])
-console.log(proxy)
 const storesAppConfig = appConfig()
 const { isCacheTagsView, isShareTagsView } = storeToRefs(storesAppConfig)
 const storesTagsViewRoutes = useTagsViewRoutes()
 const storesKeepALiveNames = useKeepALiveNames()
 const { tagsViewRoutes } = storeToRefs(storesTagsViewRoutes)
-console.log(tagsViewRoutes.value)
 
 const route = useRoute()
 const router = useRouter()
@@ -67,51 +59,51 @@ const state = reactive<TagsViewState>({
 })
 // 路由更新时（组件内生命钩子）
 onBeforeRouteUpdate(async (to) => {
-  console.log(to)
   state.routeActive = setTagsViewHighlight(to)
   state.routePath = to.meta.isDynamic ? to.meta.isDynamicPath : to.path
   await addTagsView(to.path, to)
   getTagsRefsIndex(isShareTagsView.value ? state.routePath : state.routeActive)
 })
-// 存储 tagsViewList 到浏览器临时缓存中，页面刷新时，保留记录
-const addBrowserSetSession = (tagsViewList: Array<object>) => {
-  Session.set('tagsViewList', tagsViewList)
-}
-const setTagsViewHighlight = (v: any) => {
-  const params = v.query && Object.keys(v.query).length > 0 ? v.query : v.params
-  if (!params || Object.keys(params).length <= 0) return v.path
-  let path = ''
-  for (const i in params) {
-    path += params[i]
-  }
-  // 判断是否是动态路由（xxx/:id/:name"）
-  console.log(`${v.meta.isDynamic ? v.meta.isDynamicPath : v.path}-${path}`)
-  return `${v.meta.isDynamic ? v.meta.isDynamicPath : v.path}-${path}`
-}
-const getTagsViewRoutes = async () => {
-  state.routeActive = await setTagsViewHighlight(route)
-  state.routePath = (await route.meta.isDynamic) ? route.meta.isDynamicPath : route.path
-  state.tagsViewList = []
-  state.tagsViewRoutesList = tagsViewRoutes.value
-  initTagsView()
-}
-// vuex 中获取路由信息：如果是设置了固定的（isAffix），进行初始化显示
-const initTagsView = async () => {
-  if (Session.get('tagsViewList') && isCacheTagsView.value) {
-    state.tagsViewList = await Session.get('tagsViewList')
-  } else {
-    // eslint-disable-next-line array-callback-return
-    state.tagsViewRoutesList.map((v: any): void => {
-      if (v.meta.isAffix && !v.meta.isHide) {
-        v.url = setTagsViewHighlight(v)
-        state.tagsViewList.push({ ...v })
-        storesKeepALiveNames.addCachedView(v)
+/**
+ * @description: 关闭标签
+ * @return {*}
+ */
+const closeCurrentTagsView = (path: string) => {
+  // eslint-disable-next-line array-callback-return
+  state.tagsViewList.map((v: any, k: number, arr: any) => {
+    if (!v.meta.isAffix) {
+      if (isShareTagsView.value ? v.path === path : v.url === path) {
+        storesKeepALiveNames.delCachedView(v)
+        state.tagsViewList.splice(k, 1)
+        setTimeout(() => {
+          if (state.tagsViewList.length === k && isShareTagsView.value ? state.routePath === path : state.routeActive === path) {
+            // 最后一个且高亮时
+            if (arr[arr.length - 1].meta.isDynamic) {
+              // 动态路由（xxx/:id/:name"）
+              if (k !== arr.length) router.push({ name: arr[k].name, params: arr[k].params })
+              else router.push({ name: arr[arr.length - 1].name, params: arr[arr.length - 1].params })
+            } else {
+              // 普通路由
+              if (k !== arr.length) router.push({ path: arr[k].path, query: arr[k].query })
+              else router.push({ path: arr[arr.length - 1].path, query: arr[arr.length - 1].query })
+            }
+          } else {
+            // 非最后一个且高亮时，跳转到下一个
+            if (state.tagsViewList.length !== k && isShareTagsView.value ? state.routePath === path : state.routeActive === path) {
+              if (arr[k].meta.isDynamic) {
+                // 动态路由（xxx/:id/:name"）
+                router.push({ name: arr[k].name, params: arr[k].params })
+              } else {
+                // 普通路由
+                router.push({ path: arr[k].path, query: arr[k].query })
+              }
+            }
+          }
+        }, 0)
       }
-    })
-    addTagsView(route.path, route)
-  }
-  // 初始化当前元素(li)的下标
-  getTagsRefsIndex(isShareTagsView.value ? state.routePath : state.routeActive)
+    }
+  })
+  addBrowserSetSession(state.tagsViewList)
 }
 // 获取 tagsView 的下标：用于处理 tagsView 点击时的横向滚动
 const getTagsRefsIndex = (path: string | unknown) => {
@@ -150,25 +142,54 @@ const solveAddTagsView = async (path: string, to?: any) => {
     addBrowserSetSession(state.tagsViewList)
   }
 }
-// 处理单标签时，第二次的值未覆盖第一次的 tagsViewList 值（Session Storage）
-const singleAddTagsView = (path: string, to?: any) => {
-  const isDynamicPath = to.meta.isDynamic ? to.meta.isDynamicPath : path
-  console.log(isDynamicPath)
 
-  state.tagsViewList.forEach((v) => {
-    if (
-      v.path === isDynamicPath && !isObjectValueEqual(
-        to.meta.isDynamic ? (v.params ? v.params : null) : v.query ? v.query : null,
-        to.meta.isDynamic ? (to?.params ? to?.params : null) : to?.query ? to?.query : null
-      )
-    ) {
-      to.meta.isDynamic ? (v.params = to.params) : (v.query = to.query)
-      v.url = setTagsViewHighlight(v)
-      console.log(v.url)
+onMounted(() => {
+  // 初始化 pinia 中的 tagsViewRoutes 列表
+  getTagsViewRoutes()
+})
+const getTagsViewRoutes = async () => {
+  state.routeActive = await setTagsViewHighlight(route)
 
-      addBrowserSetSession(state.tagsViewList)
-    }
-  })
+  state.routePath = (await route.meta.isDynamic) ? route.meta.isDynamicPath : route.path
+
+  state.tagsViewList = []
+  state.tagsViewRoutesList = tagsViewRoutes.value
+
+  initTagsView()
+}
+
+const setTagsViewHighlight = (v: any) => {
+  const params = v.query && Object.keys(v.query).length > 0 ? v.query : v.params
+  if (!params || Object.keys(params).length <= 0) return v.path
+  let path = ''
+  for (const i in params) {
+    path += params[i]
+  }
+  // 判断是否是动态路由（xxx/:id/:name"）
+  return `${v.meta.isDynamic ? v.meta.isDynamicPath : v.path}-${path}`
+}
+
+/**
+ * @description: vuex 中获取路由信息：如果是设置了固定的（isAffix），进行初始化显示
+ * @return {*}
+ */
+const initTagsView = async () => {
+  if (Session.get('tagsViewList') && isCacheTagsView.value) {
+    state.tagsViewList = await Session.get('tagsViewList')
+  } else {
+    // TODO map改为foreach
+    // eslint-disable-next-line array-callback-return
+    await state.tagsViewRoutesList.map((v: any) => {
+      if (v.meta.isAffix && !v.meta.isHide) {
+        v.url = setTagsViewHighlight(v)
+        state.tagsViewList.push({ ...v })
+        storesKeepALiveNames.addCachedView(v)
+      }
+    })
+    addTagsView(route.path, route)
+  }
+  // 初始化当前元素(li)的下标
+  getTagsRefsIndex(isShareTagsView.value ? state.routePath : state.routeActive)
 }
 // 1、添加 tagsView：未设置隐藏（isHide）也添加到在 tagsView 中（可开启多标签详情，单标签详情）
 const addTagsView = (path: string, to?: any) => {
@@ -177,7 +198,6 @@ const addTagsView = (path: string, to?: any) => {
     // 修复：https://gitee.com/lyt-top/vue-next-admin/issues/I3YX6G
     let item: any = ''
     if (to && to.meta.isDynamic) {
-      console.log('不应该走这个')
       // 动态路由（xxx/:id/:name"）：参数不同，开启多个 tagsview
       if (!isShareTagsView.value) await solveAddTagsView(path, to)
       else singleAddTagsView(path, to)
@@ -189,7 +209,6 @@ const addTagsView = (path: string, to?: any) => {
       else singleAddTagsView(path, to)
       if (state.tagsViewList.some((v: any) => v.path === path)) return false
       item = state.tagsViewRoutesList.find((v: any) => v.path === path)
-      console.log(item)
     }
     if (!item) return false
     if (item.meta.isLink && !item.meta.isIframe) return false
@@ -197,18 +216,30 @@ const addTagsView = (path: string, to?: any) => {
     else item.query = to?.query ? to?.query : route.query
     item.url = setTagsViewHighlight(item)
     await storesKeepALiveNames.addCachedView(item)
-    console.log(item)
     state.tagsViewList.push({ ...item })
-    console.log(state.tagsViewList)
     addBrowserSetSession(state.tagsViewList)
   })
 }
-onMounted(() => {
-  // 初始化 pinia 中的 tagsViewRoutes 列表
-  getTagsViewRoutes()
-})
+// 处理单标签时，第二次的值未覆盖第一次的 tagsViewList 值（Session Storage）
+const singleAddTagsView = (path: string, to?: any) => {
+  const isDynamicPath = to.meta.isDynamic ? to.meta.isDynamicPath : path
+  state.tagsViewList.forEach((v) => {
+    const flag = v.path === isDynamicPath && !isObjectValueEqual(
+      to.meta.isDynamic ? (v.params ? v.params : null) : v.query ? v.query : null,
+      to.meta.isDynamic ? (to?.params ? to?.params : null) : to?.query ? to?.query : null
+    )
+    if (flag) {
+      to.meta.isDynamic ? (v.params = to.params) : (v.query = to.query)
+      v.url = setTagsViewHighlight(v)
+      addBrowserSetSession(state.tagsViewList)
+    }
+  })
+}
+// 存储 tagsViewList 到浏览器临时缓存中，页面刷新时，保留记录
+const addBrowserSetSession = (tagsViewList: Array<object>) => {
+  Session.set('tagsViewList', tagsViewList)
+}
 onBeforeMount(() => {
-  console.log('-----')
 })
 /**
  * @description: 当前的 tagsView 项点击时

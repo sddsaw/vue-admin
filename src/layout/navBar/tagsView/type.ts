@@ -1,6 +1,6 @@
 // 定义接口来定义对象的类型
 export interface TagsViewState {
-  routeActive: string;
+  routeActive: string;// 当前激活的路由
   routePath: string | unknown;
   dropdown: {
   x: string | number;
