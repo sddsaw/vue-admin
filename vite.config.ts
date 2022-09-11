@@ -66,7 +66,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
     },
     // TODO 代理
     server: {
-      port: 8080,
+      port: 8000,
       strictPort: true,
       host: '0.0.0.0',
       proxy: {

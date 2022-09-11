@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia'
 import pinia from '@/store/index'
 import useUserInfo from '@/store/userInfo'
 // import { Session } from '@/utils/storage'
-// import NextLoading from '@/utils/loading'
+import NextLoading from '@/utils/loading'
 import { dynamicRoutes, notFoundAndNoPower } from '@/router/route'
 import { formatTwoStageRoutes, formatFlatteningRoutes, router } from '@/router/index'
 import useRoutesList from '@/store/routesList'
@@ -37,7 +37,7 @@ export async function initBackEndControlRoutes () {
   const { userInfo } = storeToRefs(store)
   const accessToken = userInfo?.value?.accessToken
   // 界面 loading 动画开始执行
-  // if (window.nextLoading === undefined) NextLoading.start()
+  if (window.nextLoading === undefined) NextLoading.start()
   // 无 token 停止执行下一步
   if (!accessToken) return false
   // 触发初始化用户信息 pinia

@@ -34,16 +34,18 @@ import { reactive, ref } from 'vue'
 import { getLogin } from '@/api/user'
 import { ElMessage } from 'element-plus'
 import userStore from '@/store/userInfo'
+import appConfigStore from '@/store/appConfig'
 import { LoginParams } from '@/api/types/user'
 import { useRouter, useRoute } from 'vue-router'
 import { Lock, User } from '@element-plus/icons-vue'
 import AppIcon from '@/components/AppIcon/index.vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { initBackEndControlRoutes } from '@/router/permission'
-
+import { baseNotify } from '@/utils/common'
 const router = useRouter()
 const route = useRoute()
 const createUserStore = userStore()
+const createappConfigStore = appConfigStore()
 const parmas: LoginParams = reactive({
   userName: '',
   passWord: ''
@@ -81,6 +83,7 @@ const handelSubmit = async (formEl: FormInstance | undefined) => {
   const res = await getLogin(parmas)
   createUserStore.userInfo = res
   await initBackEndControlRoutes()
+
   loginSuccess()
 }
 
@@ -88,17 +91,20 @@ const handelSubmit = async (formEl: FormInstance | undefined) => {
  * @description: 登录成功后的跳转
  * @return {*}
  */
-const loginSuccess = () => {
+const loginSuccess = async () => {
   ElMessage.success('登录成功')
   let redirect = route.query.redirect || '/'
   if (typeof redirect !== 'string') {
     redirect = '/'
   }
   // FIXME 格式校验不过 待修改 应该携带参数
-  setTimeout(() => router.replace({
+  await setTimeout(() => router.replace({
     path: redirect,
     query: {}
   }), 800)
+  const hour = new Date().getHours()
+  const thisTime = hour < 8 ? '早上好' : hour <= 11 ? '上午好' : hour <= 13 ? '中午好' : hour < 18 ? '下午好' : '晚上好'
+  baseNotify(`欢迎登录${createappConfigStore.appTitle}`, `${thisTime}！`)
 }
 </script>
 

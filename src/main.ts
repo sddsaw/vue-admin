@@ -1,7 +1,6 @@
-import { createApp, Directive, version } from 'vue'
+import { createApp, Directive } from 'vue'
 import App from './App.vue'
 import '@/styles/app.scss'
-import '@/styles/_global.scss'
 // import '@purge-icons/generated'
 import pinia from '@/store/index'
 import appConfigStore from './store/appConfig'
@@ -9,12 +8,11 @@ import watermark from './utils/wartermark'
 import router from './router/index'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import * as directives from '@/directives'
-// import * as dayjs from 'dayjs'
 import dayjs from 'dayjs'
-console.log(version)
+import '@/config'
+
 const appConfig = appConfigStore(pinia)
 if (appConfig.isWartermark) watermark.set(appConfig.wartermarkText)
-
 const app = createApp(App)
 // 错误日志上传
 app.config.errorHandler = (err, vm, info) => {

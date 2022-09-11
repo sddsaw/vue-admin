@@ -9,8 +9,13 @@
 </template>
 <script lang="ts" setup name="home">
 // import { getCurrentInstance } from 'vue'
+// import { onMounted } from 'vue'
+// import { baseConfirm } from '@/utils/common'
 // const { proxy } = getCurrentInstance() as any
 // console.log(proxy.$baseColorfullLoading())
+// onMounted(() => {
+//   baseConfirm()
+// })
 </script>
 <style lang="scss">
 

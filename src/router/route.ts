@@ -44,6 +44,20 @@ export const dynamicRoutes: RouteRecordRaw[] = [
           icon: 'material-symbols:settings-outline-rounded'
         }
       },
+      {
+        path: '/personal',
+        name: 'personal',
+        component: () => import('@/views/personal/index.vue'),
+        meta: {
+          title: '个人中心',
+          isLink: '',
+          isHide: true,
+          isAffix: true,
+          isIframe: false,
+          isKeepAlive: true,
+          icon: 'material-symbols:settings-outline-rounded'
+        }
+      },
       limitsRouter,
       menuRouter,
       systemRouter

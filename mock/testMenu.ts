@@ -18,6 +18,20 @@ const testMenu = {
       }
     },
     {
+      path: '/personal',
+      name: 'personal',
+      component: 'personal/index',
+      meta: {
+        title: '个人中心',
+        isLink: '',
+        isHide: true,
+        isAffix: false,
+        isIframe: false,
+        isKeepAlive: true,
+        icon: 'material-symbols:settings-outline-rounded'
+      }
+    },
+    {
       path: '/system',
       name: 'system',
       component: 'layout/routerView/parent',
@@ -68,7 +82,7 @@ const testMenu = {
             title: '部门管理',
             isLink: '',
             isHide: false,
-            isAffix: true,
+            isAffix: false,
             isIframe: false,
             isKeepAlive: true,
             icon: 'material-symbols:settings-outline-rounded'

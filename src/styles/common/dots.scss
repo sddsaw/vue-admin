@@ -1,5 +1,9 @@
 .dots-loader:not(:required) {
-  position: relative;
+  // position: relative;
+  position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
   display: inline-block;
   width: 7px;
   height: 7px;
@@ -13,6 +17,7 @@
   transform-origin: 50% 50%;
   animation: dots-loader 5s infinite ease-in-out;
 }
+
 
 @keyframes dots-loader {
   0% {

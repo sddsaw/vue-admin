@@ -12,9 +12,14 @@
 </template>
 
 <script lang='ts' setup>
+import { onMounted } from 'vue'
+import NextLoading from '@/utils/loading'
 import Main from '@/layout/component/main.vue'
 import Aside from '@/layout/component/aside.vue'
 import Header from '@/layout/component/header.vue'
+onMounted(async () => {
+  NextLoading.done()
+})
 </script>
 <style lang="scss" scoped>
 .flex {

@@ -25,6 +25,7 @@ const NextLoading = {
           <div class="loading-next-box-item"></div>
           <div class="loading-next-box-item"></div>
         </div>
+        <span class="loading-text">初次加载请稍等...</span>
       </div>`
     div.innerHTML = htmls
     bodys.insertBefore(div, bodys.childNodes[0])
@@ -33,9 +34,9 @@ const NextLoading = {
   // 移除 loading
   done: () => {
     nextTick(() => {
-      // window.nextLoading = false
-      // const el = <HTMLElement>document.querySelector('.loading-next')
-      // el?.parentNode?.removeChild(el)
+      window.nextLoading = false
+      const el = <HTMLElement>document.querySelector('.loading-next')
+      el?.parentNode?.removeChild(el)
     })
   }
 }

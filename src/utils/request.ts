@@ -1,19 +1,20 @@
-// import { getCurrentInstance } from 'vue'
-import { baseColorfullLoading } from '@/utils/common'
 import pinia from '@/store'
-import axios, { AxiosRequestConfig } from 'axios'
-import { ElMessage, ElMessageBox } from 'element-plus'
-import userStore from '@/store/userInfo'
 import router from '@/router/index'
+import userStore from '@/store/userInfo'
+import { ElMessage } from 'element-plus'
+import axios, { AxiosRequestConfig } from 'axios'
+import { baseColorfullLoading, baseConfirm } from '@/utils/common'
+
 const request = axios.create({
   // baseURL: import.meta.env.VITE_APP_BASE_URL,
   timeout: 1000,
   headers: { 'Content-Type': 'application/json' }
 })
-// const { ctx } = getCurrentInstance()
-// console.log(getCurrentInstance(), '----')
-// TOTO 请求拦截
-// eslint-disable-next-line no-unused-vars
+
+/**
+ * @description: 请求拦截
+ * @return {*}
+ */
 let loadingInstance :any
 request.interceptors.request.use(config => {
   const createUserStroe = userStore(pinia)
@@ -46,22 +47,31 @@ request.interceptors.response.use(response => { // http状态码为200，但是c
     // TODO 处理登录过期
     if (isRefreshing) return Promise.reject(response)
     isRefreshing = true
-    ElMessageBox.confirm('您的登录已过期，您可以取消停留在此页面，或确认重新登录', '登录过期', {
-      confirmButtonText: '确认',
-      cancelButtonText: '取消',
-      showClose: false,
-      closeOnClickModal: false
-    }).then(() => {
-      createUserStroe.resetState()
+    baseConfirm('您的登录已过期，您可以取消停留在此页面，或确认重新登录', '登录过期', async () => {
+      await createUserStroe.resetState()
       router.push({
         name: 'login',
         query: {
           redirect: router.currentRoute.value.fullPath
         }
       })
-    }).finally(() => {
-      isRefreshing = false
-    })
+    }, async () => { isRefreshing = false })
+    // ElMessageBox.confirm('您的登录已过期，您可以取消停留在此页面，或确认重新登录', '登录过期', {
+    //   confirmButtonText: '确认',
+    //   cancelButtonText: '取消',
+    //   showClose: false,
+    //   closeOnClickModal: false
+    // }).then(() => {
+    //   createUserStroe.resetState()
+    //   router.push({
+    //     name: 'login',
+    //     query: {
+    //       redirect: router.currentRoute.value.fullPath
+    //     }
+    //   })
+    // }).finally(() => {
+    //   isRefreshing = false
+    // })
     // TODO 在内部消化掉这个业务异常，阻止代码往下走
     return Promise.reject(response)
   }
