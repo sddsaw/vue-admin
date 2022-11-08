@@ -1,9 +1,12 @@
 import { defineStore } from 'pinia'
 import { ILoginInfo } from '@/api/types/user'
+import watermark from '@/utils/wartermark'
 
 const userStore = defineStore('userStore', {
   state: () => ({
-    userInfo: null as ILoginInfo | null
+    userInfo: null as ILoginInfo | null,
+    lastClickTime: 0 // 30分钟无操作自动退出
+
   }),
   getters: {
 
@@ -15,12 +18,13 @@ const userStore = defineStore('userStore', {
      */
     resetState () {
       this.$reset()
+      watermark.del()
     }
 
   },
   persist: {
     storage: sessionStorage,
-    paths: ['userInfo']
+    paths: ['userInfo', 'lastClickTime']
   }
 })
 export default userStore

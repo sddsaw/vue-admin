@@ -15,6 +15,7 @@ export interface IAppConfig{
   isCacheTagsView:boolean, // 是否开启 TagsView 缓存
   isRequestRoutes:boolean, // 是否开启后端控制路由 true是，false否
   isSortableTagsView: boolean, // 是否开启 TagsView 拖拽
+
 }
 
 // 路由缓存列表

@@ -23,8 +23,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-@extend .login-scan-animation;
-animation-delay: 0.1s;
+  @extend .login-scan-animation;
+  animation-delay: 0.1s;
   img{
     width: 200px;
     height: 200px;
@@ -33,7 +33,7 @@ animation-delay: 0.1s;
   span{
     color: #c0c4cc;
     @extend .login-scan-animation;
-animation-delay: 0.2s;
+    animation-delay: 0.2s;
   }
 }
 </style>

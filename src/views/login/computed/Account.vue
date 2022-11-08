@@ -20,6 +20,13 @@
         </template>
       </el-input>
     </el-form-item>
+    <el-row justify="end" class="mb-10">
+      <el-col :span="4">
+        <el-button link size="small" type="primary" @click="forgetPass">
+          忘记密码
+        </el-button>
+      </el-col>
+    </el-row>
     <el-form-item>
       <el-button type="primary" native-type="submit" class="w-full" :loading="loading">
         {{ loading ? '登录中' : '登录' }}
@@ -42,6 +49,9 @@ import AppIcon from '@/components/AppIcon/index.vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { initBackEndControlRoutes } from '@/router/permission'
 import { baseNotify } from '@/utils/common'
+interface Emits {
+  (event:'checkMode', isScan:boolean):void
+}
 const router = useRouter()
 const route = useRoute()
 const createUserStore = userStore()
@@ -69,7 +79,13 @@ const rules = reactive<FormRules>({
     }
   ]
 })
-
+const isScan = ref(true)
+const emits = defineEmits<Emits>()
+const forgetPass = () => {
+  console.log(123)
+  isScan.value = !isScan.value
+  emits('checkMode', isScan.value)
+}
 /**
  * @description: 登录
  * @param {*} formEl
@@ -82,6 +98,8 @@ const handelSubmit = async (formEl: FormInstance | undefined) => {
   loading.value = true
   const res = await getLogin(parmas)
   createUserStore.userInfo = res
+  // 在点击登录按钮成功时， 存第一份点击的时间
+  createUserStore.lastClickTime = new Date().getTime()
   await initBackEndControlRoutes()
 
   loginSuccess()
@@ -97,7 +115,7 @@ const loginSuccess = async () => {
   if (typeof redirect !== 'string') {
     redirect = '/'
   }
-  // FIXME 格式校验不过 待修改 应该携带参数
+  // FIXME 格式校验不过 待修改 应该携带参数 as string
   await setTimeout(() => router.replace({
     path: redirect,
     query: {}

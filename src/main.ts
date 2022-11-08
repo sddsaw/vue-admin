@@ -4,7 +4,7 @@ import '@/styles/app.scss'
 // import '@purge-icons/generated'
 import pinia from '@/store/index'
 import appConfigStore from './store/appConfig'
-import watermark from './utils/wartermark'
+// import watermark from './utils/wartermark'
 import router from './router/index'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import * as directives from '@/directives'
@@ -12,7 +12,7 @@ import dayjs from 'dayjs'
 import '@/config'
 
 const appConfig = appConfigStore(pinia)
-if (appConfig.isWartermark) watermark.set(appConfig.wartermarkText)
+// if (appConfig.isWartermark) watermark.set(appConfig.wartermarkText)
 const app = createApp(App)
 // 错误日志上传
 app.config.errorHandler = (err, vm, info) => {

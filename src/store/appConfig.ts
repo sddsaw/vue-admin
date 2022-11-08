@@ -3,6 +3,7 @@ import { IAppConfig, IError } from './types'
 
 const appConfigStore = defineStore('appConfig', {
   state: ():IAppConfig => ({
+    errorLog: [],
     appTitle: '后台管理',
     isCollapse: false, // 是否开启菜单水平折叠效果
     isRequestRoutes: true, // 是否开启后端控制路由
@@ -10,8 +11,8 @@ const appConfigStore = defineStore('appConfig', {
     isSortableTagsView: false, // 是否开启 TagsView 拖拽
     isShareTagsView: true, // 是否开启 TagsView 共用
     isWartermark: true, // 是否开启水印
-    wartermarkText: '江湖故人', // 水印文案
-    errorLog: []
+    wartermarkText: '周恩波 176****1816' // 水印文案
+
   }),
   getters: {
 

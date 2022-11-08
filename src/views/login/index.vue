@@ -10,9 +10,10 @@
           <h1 class="flex justify-center items-center text-2xl focus-in-expand  mb-10">
             欢迎来到vue-admin
           </h1>
-          <login-mode @check-mode="checkMode" />
-          <scan-code v-if="isScanFlag" />
-          <account v-else />
+          <!-- <login-mode @check-mode="checkMode" /> -->
+          <forget-password v-if="isScanFlag" @check-mode="checkMode" />
+          <!-- <scan-code v-if="isScanFlag" /> -->
+          <account v-else @check-mode="checkMode" />
         </div>
       </el-row>
       <div class="animate__animated animate__fadeInUp animate__delay-1s copyright">
@@ -25,9 +26,10 @@
 <script lang='ts' setup>
 import { onMounted, ref } from 'vue'
 import { start } from '@/utils/start'
-import LoginMode from './computed/LoginMode.vue'
+// import LoginMode from './computed/LoginMode.vue'
 import Account from './computed/Account.vue'
-import ScanCode from './computed/ScanCode.vue'
+// import ScanCode from './computed/ScanCode.vue'
+import ForgetPassword from './computed/ForgetPassword.vue'
 onMounted(() => {
   start()
 })

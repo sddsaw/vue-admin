@@ -42,7 +42,7 @@ const elDropdownList = reactive<IelDropdown[]>([
   },
   {
     title: '个人中心',
-    command: 'personal'
+    command: '/personal'
   },
   {
     title: '退出登录',

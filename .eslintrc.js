@@ -8,7 +8,8 @@ module.exports = {
   // },
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
+    'vue/setup-compiler-macros': true
   },
   extends: [
     './.eslintrc-auto-import.json', // TODO 如果全局API报错就开启这个
