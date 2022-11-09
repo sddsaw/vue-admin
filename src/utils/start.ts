@@ -83,7 +83,7 @@ export function start () {
   }
 
   for (let i = 0; i < maxStars; i++) {
-    new Star()
+    new (Star as any)()
   }
 
   function animation () {
@@ -103,5 +103,6 @@ export function start () {
 
   animation()
 }
+
 // 监听浏览器事件，动态设置canvas宽高
 window.addEventListener('resize', start, false)
