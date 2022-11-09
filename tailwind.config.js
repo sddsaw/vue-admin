@@ -5,11 +5,10 @@ module.exports = {
     extend: {},
     spacing: {
       10: '10px',
+      15: '15px',
       20: '20px',
-      3: '30px',
-      4: '24px',
-      5: '32px',
-      6: '48px'
+      25: '25px',
+      30: '30px'
     }
   },
   plugins: []

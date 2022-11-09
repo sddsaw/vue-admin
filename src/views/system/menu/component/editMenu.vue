@@ -53,11 +53,11 @@
                 <el-input v-model="state.ruleForm.redirect" placeholder="请输入路由重定向" clearable />
               </el-form-item>
             </el-col>
-            <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb-20">
+            <!-- <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb-20">
               <el-form-item label="菜单图标">
                 <IconSelector placeholder="请输入菜单图标" v-model="state.ruleForm.meta.icon" type="all" />
               </el-form-item>
-            </el-col>
+            </el-col> -->
             <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb-20">
               <el-form-item label="组件路径">
                 <el-input v-model="state.ruleForm.component" placeholder="组件路径" clearable />

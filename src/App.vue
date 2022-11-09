@@ -4,13 +4,13 @@
   </el-config-provider>
 </template>
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-// import dayjs from 'dayjs'
 import userStore from '@/store/userInfo'
-const createUserStore = userStore()
+import setIntroduction from '@/utils/setIconfont'
+import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
 const timer = ref(0)
 const router = useRouter()
+const createUserStore = userStore()
 const env = import.meta.env.MODE !== 'development'
 window.addEventListener(
   'click',
@@ -21,7 +21,13 @@ window.addEventListener(
   },
   true
 )
-
+// 设置初始化，防止刷新时恢复默认
+onBeforeMount(() => {
+  // 设置批量第三方 icon 图标
+  setIntroduction.cssCdn()
+  // 设置批量第三方 js
+  setIntroduction.jsCdn()
+})
 onMounted(() => {
   if (env) isTimeOut()
 })

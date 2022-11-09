@@ -63,8 +63,8 @@
         :total="state.tableData.total"
       />
     </el-card>
-    <!-- <AddRole ref="addRoleRef" />
-    <EditRole ref="editRoleRef" /> -->
+    <AddRole ref="addRoleRef" />
+    <EditRole ref="editRoleRef" />
   </div>
 </template>
 
@@ -73,8 +73,8 @@ import { reactive, onMounted, ref } from 'vue'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import { FolderAdd, Search } from '@element-plus/icons-vue'
 
-// import AddRole from '/@/views/system/role/component/addRole.vue'
-// import EditRole from '/@/views/system/role/component/editRole.vue'
+import AddRole from './component/addRole.vue'
+import EditRole from './component/editRole.vue'
 // 定义接口来定义对象的类型
 interface TableData {
   roleName: string;
