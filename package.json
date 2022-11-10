@@ -1,15 +1,15 @@
 {
   "name": "vue-admin",
   "private": true,
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "dev": "vite",
-    "dev:production": "vite --mode production",
+    "dev:production": "vite --mode production ",
     "preview": "vite preview",
     "prepare": "husky install",
     "release": "standard-version",
     "build": "vue-tsc --noEmit && vite build",
-    "build:production": "vue-tsc --noEmit && vite build --mode production",
+    "build:production": "vue-tsc --noEmit && npm run release && vite build --mode production",
     "lint": "eslint --fix --ext .js --ext .jsx --ext .vue src/"
   },
   "dependencies": {
