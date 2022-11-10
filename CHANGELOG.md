@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/sddsaw/vue-admin/compare/v0.0.3...v0.0.4) (2022-11-10)
+
+
+### Features
+
+* 按钮指令权限 ([10c24c8](https://github.com/sddsaw/vue-admin/commit/10c24c8a4f49b8660e5a5ca97cdcbb39b065c629))
+* 全局捕获错误信息 ([e43068e](https://github.com/sddsaw/vue-admin/commit/e43068e07d2f702c80724c4a2ba3bfc54640edae))
+* 页面动画 ([68980d9](https://github.com/sddsaw/vue-admin/commit/68980d92f2cf777a86396504cf8235ec9c7b13ae))
+* 优化权限 ([f873f66](https://github.com/sddsaw/vue-admin/commit/f873f66774deee19e635b75eff7ac2b9448a1c13))
+* 优化navbar样式 ([5eed992](https://github.com/sddsaw/vue-admin/commit/5eed9929f69058667d7abf8c4dc52da0803cda50))
+* 增加全屏loading ([c3e4b5b](https://github.com/sddsaw/vue-admin/commit/c3e4b5b5e599104cc191ccb42618f89ce934f2a7))
+* 增加忘记密码，关闭多登录入口，增加无操作30分钟自动退出 ([59173ee](https://github.com/sddsaw/vue-admin/commit/59173ee27b0fd224027dba814ea68ad5c274639f))
+* 增加tagsview ([d48e720](https://github.com/sddsaw/vue-admin/commit/d48e720ad2f4d1feb55c372835b5bdf554077cae))
+
+
+### Bug Fixes
+
+* new 构造函数报any错误信息 ([c69240f](https://github.com/sddsaw/vue-admin/commit/c69240f5ba9ed8805d694ce61fc19dfa169d8f02))
+
 ### [0.0.3](https://github.com/sddsaw/vue-admin/compare/v0.0.2...v0.0.3) (2022-08-18)
 
 
