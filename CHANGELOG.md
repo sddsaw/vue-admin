@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/sddsaw/vue-admin/compare/v0.0.4...v0.0.5) (2022-11-10)
+
+
+### Features
+
+* 添加内嵌和外链 ([763bdd2](https://github.com/sddsaw/vue-admin/commit/763bdd29357a7d3c1e877f36b4003b1159cd3575))
+
 ### [0.0.4](https://github.com/sddsaw/vue-admin/compare/v0.0.3...v0.0.4) (2022-11-10)
 
 
