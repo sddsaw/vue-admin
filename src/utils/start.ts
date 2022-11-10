@@ -50,8 +50,8 @@ export function start () {
     return diameter / 2
     // 星星移动范围，值越大范围越小，
   }
-
-  const Star = function (this: any) {
+  // 可以实用class 来写这个函数
+  const Star:any = function (this: any) {
     this.orbitRadius = random(maxOrbit(w, h))
     this.radius = random(20, this.orbitRadius) / 8
     // 星星大小
@@ -83,7 +83,7 @@ export function start () {
   }
 
   for (let i = 0; i < maxStars; i++) {
-    new (Star as any)()
+    new Star()
   }
 
   function animation () {

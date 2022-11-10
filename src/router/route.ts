@@ -45,6 +45,34 @@ export const dynamicRoutes: RouteRecordRaw[] = [
         }
       },
       {
+        path: '/iframes',
+        name: 'layoutIfameView',
+        component: () => import('@/layout/routerView/iframes.vue'),
+        meta: {
+          title: '内嵌iframe',
+          isLink: 'https://nodejs.org/zh-cn/',
+          isHide: false,
+          isKeepAlive: false,
+          isAffix: true,
+          isIframe: true,
+          icon: 'iconfont icon-neiqianshujuchucun'
+        }
+      },
+      {
+        path: '/link',
+        name: 'layoutLinkView',
+        component: () => import('@/layout/routerView/link.vue'),
+        meta: {
+          title: '外链跳转',
+          isLink: 'https://element-plus.gitee.io/#/zh-CN/component/installation',
+          isHide: false,
+          isKeepAlive: false,
+          isAffix: true,
+          isIframe: false,
+          icon: 'iconfont icon-neiqianshujuchucun'
+        }
+      },
+      {
         path: '/personal',
         name: 'personal',
         component: () => import('@/views/personal/index.vue'),

@@ -8,6 +8,7 @@ export interface IError{
 export interface IAppConfig{
   errorLog:IError[],
   appTitle?:string,
+  isTagsview:boolean,
   isCollapse:boolean, // 侧边栏开关
   isWartermark:boolean, // 是否开启水印
   wartermarkText:string, // 水印文案

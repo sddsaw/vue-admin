@@ -23,7 +23,7 @@
     <canvas id="canvas" />
   </div>
 </template>
-<script lang='ts' setup>
+<script lang='ts' setup name="login">
 import { onMounted, ref } from 'vue'
 import { start } from '@/utils/start'
 // import LoginMode from './computed/LoginMode.vue'

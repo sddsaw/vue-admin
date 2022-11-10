@@ -2,7 +2,7 @@
   <div class="h-full">
     <router-view v-slot="{ Component }">
       <transition name="slide-right" mode="out-in">
-        <keep-alive>
+        <keep-alive :include="getKeepAliveNames">
           <component :is="Component" />
         </keep-alive>
       </transition>
@@ -10,6 +10,16 @@
   </div>
 </template>
 <script lang='ts' setup>
+import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import useKeepALiveNamesStroe from '@/store/keepAliveNames'
+const storesKeepAliveNames = useKeepALiveNamesStroe()
+const { cachedViews } = storeToRefs(storesKeepAliveNames)
+
+// 获取组件缓存列表(name值)
+const getKeepAliveNames = computed(() => {
+  return cachedViews.value
+})
 </script>
 
 <style lang='scss' scoped>

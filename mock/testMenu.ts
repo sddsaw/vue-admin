@@ -13,8 +13,36 @@ const testMenu = {
         isHide: false,
         isAffix: true,
         isIframe: false,
-        isKeepAlive: true,
+        isKeepAlive: false,
         icon: 'iconfont icon-shouye'
+      }
+    },
+    {
+      path: '/iframes',
+      name: 'layoutIfameView',
+      component: 'layout/routerView/iframe',
+      meta: {
+        title: '内嵌iframe',
+        isLink: 'https://nodejs.org/zh-cn/',
+        isHide: false,
+        isKeepAlive: false,
+        isAffix: true,
+        isIframe: true,
+        icon: 'iconfont icon-neiqianshujuchucun'
+      }
+    },
+    {
+      path: '/link',
+      name: 'layoutLinkView',
+      component: 'layout/routerView/link',
+      meta: {
+        title: '外链跳转',
+        isLink: 'https://element-plus.gitee.io/#/zh-CN/component/installation',
+        isHide: false,
+        isKeepAlive: false,
+        isAffix: true,
+        isIframe: false,
+        icon: 'iconfont icon-caozuo-wailian'
       }
     },
     {
@@ -248,7 +276,7 @@ const testMenu = {
                     isHide: false,
                     isAffix: false,
                     isIframe: false,
-                    isKeepAlive: true,
+                    isKeepAlive: false,
                     icon: 'material-symbols:settings-outline-rounded'
                   }
                 }

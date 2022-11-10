@@ -17,7 +17,7 @@ const app = createApp(App)
 // 错误日志上传
 app.config.errorHandler = (err, vm, info) => {
   console.log(err)
-  console.log(vm?.$options.__file)
+  console.log(vm)
   console.log(info)
   appConfig.ADD_ERROELOG({
     err,

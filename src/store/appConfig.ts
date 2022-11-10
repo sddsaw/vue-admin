@@ -5,6 +5,7 @@ const appConfigStore = defineStore('appConfig', {
   state: ():IAppConfig => ({
     errorLog: [],
     appTitle: '后台管理',
+    isTagsview: false, // 是否开启 Tagsview
     isCollapse: false, // 是否开启菜单水平折叠效果
     isRequestRoutes: true, // 是否开启后端控制路由
     isCacheTagsView: false, // 是否开启 TagsView 缓存
