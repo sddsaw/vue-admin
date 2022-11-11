@@ -21,8 +21,26 @@
 </template>
 
 <script lang='ts' setup>
+import { computed } from 'vue'
+import appConfigStore from '@/store/appConfig'
+import { storeToRefs } from 'pinia'
+import useTagsViewRoutes from '@/store/tagsViewRoutes'
+
+const appConfig = appConfigStore()
+const storesTagsViewRoutes = useTagsViewRoutes()
+// 设置主内容的高度
+const initTagViewHeight = computed(() => {
+  const { isTagsview } = storeToRefs(appConfig)
+  const { isTagsViewCurrenFull } = storeToRefs(storesTagsViewRoutes)
+
+  if (isTagsViewCurrenFull.value) {
+    return '30px'
+  } else {
+    if (isTagsview) return '114px'
+    else return '80px'
+  }
+})
 </script>
 
 <style lang='scss' scoped>
-@import './index.scss';
 </style>

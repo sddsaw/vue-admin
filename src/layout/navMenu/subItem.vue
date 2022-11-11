@@ -26,10 +26,11 @@
 
 <script lang='ts' setup name="subItem">
 import { computed } from 'vue'
-import { RouteRecordRaw } from 'vue-router'
 import AppIcon from '@/components/AppIcon/index.vue'
+import { childrenType } from '../type'
+
 interface Props {
-  childrenList:RouteRecordRaw
+  childrenList:childrenType[]
 }
 const props = defineProps<Props>()
 const childrenLists = computed(() => { return props.childrenList })

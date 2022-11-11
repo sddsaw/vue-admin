@@ -2,7 +2,12 @@
  * 消息通知
  * @returns 返回模拟数据
  */
-export const newsInfoList: Array<object> = [
+export interface Idata {
+  title:string,
+  date:string,
+  link:string
+}
+export const newsInfoList: Array<Idata> = [
   {
     title: '[发布] 2021年02月28日发布基于 vue3.x + vite v1.0.0 版本',
     date: '02/28',

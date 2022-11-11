@@ -1,18 +1,16 @@
 import { createApp, Directive } from 'vue'
-import App from './App.vue'
-import '@/styles/app.scss'
 // import '@purge-icons/generated'
-import pinia from '@/store/index'
-import appConfigStore from './store/appConfig'
-// import watermark from './utils/wartermark'
-import router from './router/index'
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-import * as directives from '@/directives'
-import dayjs from 'dayjs'
 import '@/config'
+import dayjs from 'dayjs'
+import '@/styles/app.scss'
+import App from './App.vue'
+import pinia from '@/store/index'
+import router from './router/index'
+import * as directives from '@/directives'
+import appConfigStore from './store/appConfig'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 const appConfig = appConfigStore(pinia)
-// if (appConfig.isWartermark) watermark.set(appConfig.wartermarkText)
 const app = createApp(App)
 // 错误日志上传
 app.config.errorHandler = (err, vm, info) => {
@@ -28,7 +26,11 @@ app.config.errorHandler = (err, vm, info) => {
 }
 pinia.use(piniaPluginPersistedstate)
 app.use(pinia).use(router).mount('#app')
-// TODO 自定义指令
+/**
+ * @description: 自定义指令注册
+ * @param {*} directives
+ * @return {*}
+ */
 Object.keys(directives).forEach(key => {
   app.directive(key, (directives as { [key: string]: Directive })[key])
 })

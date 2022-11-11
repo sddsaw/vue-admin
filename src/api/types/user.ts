@@ -9,6 +9,8 @@ export interface ILoginInfo {
   authBtnList:Array<number>// 按钮权限集
 }
 export type LoginParams = {
-  userName:string;
-  passWord:string
+  username: string, // 用户名
+  password: string, // 密码
+  grant_type: string, //
+
 }

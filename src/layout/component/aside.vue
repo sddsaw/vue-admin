@@ -10,14 +10,16 @@
 </template>
 
 <script lang='ts' setup>
+
 import { storeToRefs } from 'pinia'
 import Logo from '@/layout/logo/index.vue'
-import { RouteRecordRaw } from 'vue-router'
+// import { RouteRecordRaw } from 'vue-router'
 import useRoutesList from '@/store/routesList'
 import { onBeforeMount, ref, computed } from 'vue'
 import appConfigStore from '@/store/appConfig'
 import Vertical from '@/layout/navMenu/vertical.vue'
-const menuList = ref<RouteRecordRaw[]>([])
+import { childrenType } from '../type'
+const menuList = ref<childrenType[]>([])
 const createAppConfigStore = appConfigStore()
 const isCollapse = computed(() => { return createAppConfigStore.isCollapse })
 const stores = useRoutesList()

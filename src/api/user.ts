@@ -4,6 +4,8 @@
  * @return {*}
  */
 import request from '@/utils/request'
+import { stringify } from 'qs'
+
 import { ILoginInfo, LoginParams } from '@/api/types/user'
 /**
  * @description: 登录
@@ -12,9 +14,10 @@ import { ILoginInfo, LoginParams } from '@/api/types/user'
  */
 export const getLogin = (data:LoginParams) => {
   return request<ILoginInfo>({
-    data,
     method: 'POST',
-    url: '/mock/api/login'
+    data: stringify(data),
+    url: 'lxzk-auth/oauth/token',
+    contentType: 'application/x-www-form-urlencoded'
   })
 }
 

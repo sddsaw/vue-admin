@@ -4,11 +4,14 @@ import userStore from '@/store/userInfo'
 import { ElMessage } from 'element-plus'
 import axios, { AxiosRequestConfig } from 'axios'
 import { baseColorfullLoading, baseConfirm } from '@/utils/common'
-
 const request = axios.create({
-  // baseURL: import.meta.env.VITE_APP_BASE_URL,
-  timeout: 1000,
-  headers: { 'Content-Type': 'application/json' }
+  baseURL: import.meta.env.VITE_APP_BASE_URL,
+  timeout: 10000,
+  headers: {
+    // application/x-www-form-urlencoded
+    'Content-Type': 'application/json',
+    Authorization: 'Basic Y2dtLXdlYi1tYW5hZ2VyOmNnbS13ZWItbWFuYWdlci1wdyMkIyVA'
+  }
 })
 
 /**
@@ -17,10 +20,14 @@ const request = axios.create({
  */
 let loadingInstance :any
 request.interceptors.request.use(config => {
-  const createUserStroe = userStore(pinia)
-  if (createUserStroe.userInfo && createUserStroe.userInfo.accessToken) {
+  const userInfo = userStore(pinia).userInfo
+  const { accessToken } = userInfo
+  if (config.contentType) {
+    config!.headers!['Content-Type'] = config.contentType
+  }
+  if (accessToken) {
     // TODO 加此判断是因为headers里面是有可能为null，校验不过
-    if (config && config?.headers) config.headers.Authorization = `Basic ${createUserStroe.userInfo.accessToken}`
+    if (config?.headers) config.headers.Authorization = `Basic ${accessToken}`
   }
   if (config.loading) loadingInstance = baseColorfullLoading()
   return config

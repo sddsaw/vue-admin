@@ -222,12 +222,12 @@
 <script lang="ts" setup>
 import { reactive, computed, ref } from 'vue'
 import { formatAxis } from '@/utils/formatTime'
-import { newsInfoList } from './mock'
+import { newsInfoList, Idata } from './mock'
 import { Position } from '@element-plus/icons-vue'
 import EditPassword from './component/editPassword.vue'
 // 定义接口来定义对象的类型
 interface PersonalState {
-  newsInfoList: any;
+  newsInfoList: Idata[];
   personalForm: any;
 }
 // 常用于给  某个子组件的组件实例 获取对应类型

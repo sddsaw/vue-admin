@@ -15,7 +15,8 @@ export const auth:Directive = {
     if (value) {
       const stores = useUserInfo(pinia)
       const { userInfo } = storeToRefs(stores)
-      if (!userInfo?.value?.authBtnList.some((v: string) => v === value)) el?.parentNode.removeChild(el)
+      // if (!userInfo?.value?.authBtnList.some((v: string) => v === value)) el?.parentNode!.removeChild(el)
+      if (!userInfo?.value?.authBtnList.some((v: number) => v === value)) el?.parentNode!.removeChild(el)
     } else {
       throw new Error("need roles! Like v-auth=\"['admin','test']\"")
     }
@@ -32,7 +33,7 @@ export const auths:Directive = {
     if (value) {
       const stores = useUserInfo(pinia)
       const flaglengt = stores?.userInfo?.authBtnList.filter(item => value.indexOf(item) > -1)
-      if (!flaglengt?.length) el.parentNode.removeChild(el)
+      if (!flaglengt?.length) el?.parentNode!.removeChild(el)
     } else {
       throw new Error("need roles! Like v-auth=\"['admin','test']\"")
     }
@@ -49,8 +50,8 @@ export const authAll:Directive = {
     const stores = useUserInfo(pinia)
     const authBtnList = stores?.userInfo?.authBtnList || []
     if (value) {
-      const result = authBtnList.length === value.length && authBtnList.every(a => value.some(b => a === b)) && value.every(_b => authBtnList.some(_a => _a === _b))
-      if (!result) el.parentNode.removeChild(el)
+      const result = authBtnList.length === value.length && authBtnList.every(a => value.some((b: number) => a === b)) && value.every((_b: number) => authBtnList.some(_a => _a === _b))
+      if (!result) el.parentNode!.removeChild(el)
     } else {
       throw new Error("need roles! Like v-auth=\"['admin','test']\"")
     }

@@ -31,6 +31,7 @@ import Account from './computed/Account.vue'
 // import ScanCode from './computed/ScanCode.vue'
 import ForgetPassword from './computed/ForgetPassword.vue'
 onMounted(() => {
+  console.log(1)
   start()
 })
 const isScanFlag = ref(false)

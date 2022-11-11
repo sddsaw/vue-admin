@@ -1,10 +1,10 @@
 <template>
   <el-form ref="ruleFormRef" :rules="rules" :model="parmas" @submit.prevent="handelSubmit(ruleFormRef)">
-    <el-form-item prop="userName">
-      <el-input v-model="parmas.userName" :prefix-icon="User" placeholder="请输入用户名" />
+    <el-form-item prop="username">
+      <el-input v-model="parmas.username" :prefix-icon="User" placeholder="请输入用户名" />
     </el-form-item>
-    <el-form-item prop="passWord">
-      <el-input :type="isShowPassword ? 'password' : 'text'" v-model="parmas.passWord" placeholder="请输入密码">
+    <el-form-item prop="password">
+      <el-input :type="isShowPassword ? 'password' : 'text'" v-model="parmas.password" placeholder="请输入密码">
         <template #prefix>
           <el-icon class="el-input__icon">
             <Lock />
@@ -37,6 +37,7 @@
 </template>
 
 <script lang='ts' setup>
+
 import { reactive, ref } from 'vue'
 import { getLogin } from '@/api/user'
 import { ElMessage } from 'element-plus'
@@ -57,21 +58,22 @@ const route = useRoute()
 const createUserStore = userStore()
 const createappConfigStore = appConfigStore()
 const parmas: LoginParams = reactive({
-  userName: '',
-  passWord: ''
+  username: '',
+  password: '',
+  grant_type: 'password'
 })
 const loading = ref(false)
 const isShowPassword = ref(true)
 const ruleFormRef = ref<FormInstance>()
 const rules = reactive<FormRules>({
-  userName: [
+  username: [
     {
       required: true,
       message: '请输入用户名',
       trigger: 'change'
     }
   ],
-  passWord: [
+  password: [
     {
       required: true,
       message: '请输入密码',
@@ -117,7 +119,7 @@ const loginSuccess = async () => {
   }
   // FIXME 格式校验不过 待修改 应该携带参数 as string
   await setTimeout(() => router.replace({
-    path: redirect,
+    path: redirect as string,
     query: {}
   }), 800)
   const hour = new Date().getHours()

@@ -36,13 +36,15 @@ import { storeToRefs } from 'pinia'
 import appConfigStore from '@/store/appConfig'
 import SubItem from '@/layout/navMenu/subItem.vue'
 import AppIcon from '@/components/AppIcon/index.vue'
-import { RouteRecordRaw, useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
+import { childrenType } from '../type'
+
 const route = useRoute()
 const store = appConfigStore()
 const { isCollapse } = storeToRefs(store)
 
 interface Props {
-  menuList:RouteRecordRaw[]
+  menuList:childrenType[]
 }
 const props = defineProps<Props>()
 
