@@ -1,0 +1,146 @@
+<template>
+  <el-form ref="ruleFormRef" :rules="rules" :model="parmas" @submit.prevent="handelSubmit(ruleFormRef)">
+    <el-form-item prop="username">
+      <el-input v-model="parmas.username" :prefix-icon="User" placeholder="请输入用户名" />
+    </el-form-item>
+    <el-form-item prop="password">
+      <el-input :type="isShowPassword ? 'password' : 'text'" v-model="parmas.password" placeholder="请输入密码">
+        <template #prefix>
+          <el-icon class="el-input__icon">
+            <Lock />
+          </el-icon>
+        </template>
+
+        <template #suffix>
+          <app-icon
+            :icon="isShowPassword ? 'ph:eye-light' : 'ph:eye-closed-duotone'"
+            class="login-content-password"
+            @click="isShowPassword = !isShowPassword"
+          />
+        </template>
+      </el-input>
+    </el-form-item>
+    <el-row justify="end" class="mb-10">
+      <el-col :span="4">
+        <el-button link size="small" type="primary" @click="forgetPass">
+          忘记密码
+        </el-button>
+      </el-col>
+    </el-row>
+    <el-form-item>
+      <el-button type="primary" native-type="submit" class="w-full" :loading="loading">
+        {{ loading ? '登录中' : '登录' }}
+      </el-button>
+    </el-form-item>
+  </el-form>
+  <span class="tips">* 温馨提示：建议使用谷歌、Microsoft Edge，版本 79.0.1072.62 及以上浏览器，360浏览器请使用极速模式</span>
+</template>
+
+<script lang='ts' setup>
+
+import { reactive, ref } from 'vue'
+import { getLogin } from '@/api/user'
+import { ElMessage } from 'element-plus'
+import userStore from '@/store/userInfo'
+import appConfigStore from '@/store/appConfig'
+import { LoginParams } from '@/api/types/user'
+import { useRouter, useRoute } from 'vue-router'
+import { Lock, User } from '@element-plus/icons-vue'
+import AppIcon from '@/components/AppIcon/index.vue'
+import type { FormInstance, FormRules } from 'element-plus'
+import { initBackEndControlRoutes } from '@/router/permission'
+import { baseNotify } from '@/utils/common'
+interface Emits {
+  (event:'checkMode', isScan:boolean):void
+}
+const router = useRouter()
+const route = useRoute()
+const createUserStore = userStore()
+const createappConfigStore = appConfigStore()
+const parmas: LoginParams = reactive({
+  username: '',
+  password: '',
+  grant_type: 'password'
+})
+const loading = ref(false)
+const isShowPassword = ref(true)
+const ruleFormRef = ref<FormInstance>()
+const rules = reactive<FormRules>({
+  username: [
+    {
+      required: true,
+      message: '请输入用户名',
+      trigger: 'change'
+    }
+  ],
+  password: [
+    {
+      required: true,
+      message: '请输入密码',
+      trigger: 'change'
+    }
+  ]
+})
+const isScan = ref(true)
+const emits = defineEmits<Emits>()
+const forgetPass = () => {
+  console.log(123)
+  isScan.value = !isScan.value
+  emits('checkMode', isScan.value)
+}
+/**
+ * @description: 登录
+ * @param {*} formEl
+ * @return {*}
+ */
+const handelSubmit = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  const validData = await formEl.validate()
+  if (!validData) return false
+  loading.value = true
+  const res = await getLogin(parmas)
+  createUserStore.userInfo = res
+  // 在点击登录按钮成功时， 存第一份点击的时间
+  createUserStore.lastClickTime = new Date().getTime()
+  await initBackEndControlRoutes()
+
+  loginSuccess()
+}
+
+/**
+ * @description: 登录成功后的跳转
+ * @return {*}
+ */
+const loginSuccess = async () => {
+  ElMessage.success('登录成功')
+  let redirect = route.query.redirect || '/'
+  if (typeof redirect !== 'string') {
+    redirect = '/'
+  }
+  // FIXME 格式校验不过 待修改 应该携带参数 as string
+  await setTimeout(() => router.replace({
+    path: redirect as string,
+    query: {}
+  }), 800)
+  const hour = new Date().getHours()
+  const thisTime = hour < 8 ? '早上好' : hour <= 11 ? '上午好' : hour <= 13 ? '中午好' : hour < 18 ? '下午好' : '晚上好'
+  baseNotify(`欢迎登录${createappConfigStore.appTitle}`, `${thisTime}！`)
+}
+</script>
+
+<style lang='scss' scoped>
+.tips {
+  color: #c0c4cc;
+  font-size: 12px;
+}
+
+.login-content-password {
+  display: inline-block;
+  width: 20px;
+  cursor: pointer;
+
+  &:hover {
+    color: #909399;
+  }
+}
+</style>

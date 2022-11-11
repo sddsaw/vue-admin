@@ -1,3 +1,2 @@
-export interface IGetUserInfo {
 
-}
+export {}

@@ -1,0 +1,21 @@
+/* ./src/index.css */
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
+@import "animate.css";
+@import './element.scss';
+@import 'common/transition.scss';
+@import '@/styles/common/dots.scss';
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+html,body,#app{
+  //taliwind提供的css原子类
+  @apply h-full w-full;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
+  font-size: 14px;
+  overflow: hidden;
+  position: relative;
+  background-color: #f8f8f8;
+}

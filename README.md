@@ -14,6 +14,7 @@ This template should help get you started developing with Vue 3 and TypeScript i
 * commitlint https://github.com/conventional-changelog/commitlint; 对commit message进行规范约束,不按照规范提交不到个人仓库
 * lint-staged https://github.com/okonet/lint-staged#readme 在提交代码时进行eslint校验,校验不过不可提交到远端仓库
 * vite-plugin-eslint https://github.com/gxmari007/vite-plugin-eslint 在开发,打包时进行eslint校验,终端和浏览器都会提示相应的错误信息。
+https://github.com/vbenjs/vite-plugin-mock/blob/main/README.zh_CN.md mock文档
 
 https://github.com/element-plus/element-plus/issues/5693
 https://www.npmjs.com/package/unplugin-vue-define-options vue3添加组件name名插件
@@ -39,18 +40,27 @@ https://www.npmjs.com/package/unplugin-vue-define-options vue3添加组件name�
             -如果工作区有多个格式化工具，设置eslint为.js，.ts，.vue文件为默认格式化工具
     （3）安装volar插件 支持vue3
 
-feat: 新特性
-fix: 修改问题
-refactor: 代码重构
-docs: 文档修改
-style: 代码格式修改, 注意不是 css 修改
-test: 测试用例修改
-chore: 其他修改, 比如构建流程, 依赖管理.
-pref: 性能提升的修改
-build: 对项目构建或者依赖的改动
-ci: CI 的修改
-revert: revert 前一个 commit
+
+feat 增加新功能
+fix 修复问题/BUG
+style 代码风格相关无影响运行结果的
+perf 优化/性能提升
+refactor 重构
+revert 撤销修改
+test 测试相关
+docs 文档/注释
+chore 依赖更新/脚手架配置修改等
+workflow 工作流改进
+ci 持续集成
+types 类型定义文件更改
+wip 开发中
+
 
 changelog 需要在master分支上面进行初始化  npx standard-version --first-release
+可以使用 rollup-plugin-visualizer 插件查看当前项目打包结构来针对性优化
 
+npm i vite-plugin-vue-setup-extend -D
+unplugin-vue-define-options 解决Vue3中使用setup如何定义组件的name属性
+https://segmentfault.com/a/1190000041884869/
 
+https://juejin.cn/post/7057439040911441957
